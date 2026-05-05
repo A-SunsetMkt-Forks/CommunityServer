@@ -140,15 +140,23 @@ namespace ASC.Web.Studio.Core.HelpCenter
 
             if (helpCenterData == null)
             {
-                helpCenterData = new T { ResetCacheKey = resetCacheKey };
-                var request = new HelpCenterRequest
+                try
                 {
-                    Url = url,
-                    BaseUrl = baseUrl,
-                    HelpLinkBlock = helpLinkBlock,
-                    Starter = (r, html) => InitAndCacheData(r, html, helpCenterData)
-                };
-                await request.SendRequestAsync();
+                    helpCenterData = new T { ResetCacheKey = resetCacheKey };
+                    var request = new HelpCenterRequest
+                    {
+                        Url = url,
+                        BaseUrl = baseUrl,
+                        HelpLinkBlock = helpLinkBlock,
+                        Starter = (r, html) => InitAndCacheData(r, html, helpCenterData)
+                    };
+                    await request.SendRequestAsync();
+                }
+                catch (Exception e)
+                {
+                    helpCenterData = null;
+                    Log.Error($"Error GetHelpCenter from {url}", e);
+                }
             }
 
             return helpCenterData;
@@ -347,9 +355,41 @@ namespace ASC.Web.Studio.Core.HelpCenter
             };
             using (var httpClient = new HttpClient(httpHandler) { Timeout = TimeSpan.FromMinutes(1) })
             {
-                var dataAsync = await httpClient.GetStringAsync(Url);
+                var dataAsync = await GetStringWith308RedirectsAsync(httpClient, new Uri(BaseUrl), Url);
+
                 Starter(this, dataAsync);
             }
+        }
+
+        internal async Task<string> GetStringWith308RedirectsAsync(HttpClient client, Uri baseUrl, string url, int maxRedirects = 10)
+        {
+            for (int i = 0; i < maxRedirects; i++)
+            {
+                using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return await response.Content.ReadAsStringAsync();
+                    }
+
+                    // HttpStatusCode.PermanentRedirect
+                    if ((int)response.StatusCode == 308)
+                    {
+                        var location = response.Headers.Location
+                            ?? throw new HttpRequestException("308 without Location header");
+
+                        url = location.IsAbsoluteUri
+                            ? location.ToString()
+                            : new Uri(baseUrl, location).ToString();
+
+                        continue;
+                    }
+
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+
+            throw new HttpRequestException("Too many redirects");
         }
     }
 }

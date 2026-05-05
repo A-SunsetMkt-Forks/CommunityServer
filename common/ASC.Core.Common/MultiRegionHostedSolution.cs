@@ -26,6 +26,7 @@ using ASC.Common.Data;
 using ASC.Common.Data.Sql;
 using ASC.Core.Billing;
 using ASC.Core.Tenants;
+using ASC.Core.Users;
 using ASC.Security.Cryptography;
 
 namespace ASC.Core
@@ -112,6 +113,14 @@ namespace ASC.Core
         }
 
 
+        public List<UserInfo> GetUsers(IEnumerable<string> userIds, bool? docspace = null)
+        {
+            return GetRegionServices(docspace)
+                .SelectMany(r => r.FindUsers(userIds))
+                .ToList();
+        }
+
+
         public string CreateAuthenticationCookie(string region, int tenantId, Guid userId)
         {
             return GetRegionService(region).CreateAuthenticationCookie(tenantId, userId);
@@ -123,9 +132,9 @@ namespace ASC.Core
             return GetRegionService(region).GetTariff(tenantId, withRequestToPaymentSystem);
         }
 
-        public void SetTariff(string region, int tenant, bool paid)
+        public void SetTariff(string region, int tenant, bool paid, string email = null, string firstName = null, string lastName = null)
         {
-            GetRegionService(region).SetTariff(tenant, paid);
+            GetRegionService(region).SetTariff(tenant, paid, email, firstName, lastName);
         }
 
         public void SetTariff(string region, int tenant, Tariff tariff)

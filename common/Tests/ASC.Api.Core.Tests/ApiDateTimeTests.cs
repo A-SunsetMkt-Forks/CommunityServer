@@ -34,7 +34,7 @@ namespace ASC.Api.Core.Tests
             var utcTime = apiDateTime1.UtcTime;
             Assert.AreEqual(dateTime.Kind,utcTime.Kind);
             Assert.AreEqual(dateTime,utcTime);
-            Assert.AreEqual(apiDateTime1.ToString(),parseTime);
+            Assert.AreEqual(parseTime, apiDateTime1.ToString());
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace ASC.Api.Core.Tests
             var utcTime = apiDateTime1.UtcTime;
             Assert.AreEqual(dateTime.Kind, utcTime.Kind);
             Assert.AreEqual(dateTime, utcTime);
-            Assert.AreEqual(apiDateTime1.ToString(), parseTime);
+            Assert.AreEqual(parseTime, apiDateTime1.ToString());
         }
 
         [TestMethod]

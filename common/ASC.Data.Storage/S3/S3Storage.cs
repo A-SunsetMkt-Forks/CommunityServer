@@ -92,19 +92,28 @@ namespace ASC.Data.Storage.S3
             _cache = moduleConfig.Cache;
             _dataList = new DataList(moduleConfig);
             _attachment = moduleConfig.Attachment;
-            _domains.AddRange(
-                moduleConfig.Domains.Cast<DomainConfigurationElement>().Select(x => string.Format("{0}/", x.Name)));
 
-            //Make expires
-            _domainsExpires =
-                moduleConfig.Domains.Cast<DomainConfigurationElement>().Where(x => x.Expires != TimeSpan.Zero).
-                    ToDictionary(x => x.Name,
-                                 y => y.Expires);
-            _domainsExpires.Add(string.Empty, moduleConfig.Expires);
-
-            _domainsAcl = moduleConfig.Domains.Cast<DomainConfigurationElement>().ToDictionary(x => x.Name,
-                                                                                               y => GetS3Acl(y.Acl));
             _moduleAcl = GetS3Acl(moduleConfig.Acl);
+            _domainsAcl = new Dictionary<string, S3CannedACL>();
+            _domainsExpires.Add(string.Empty, moduleConfig.Expires);
+            _domainsValidators.Add(string.Empty, CreateValidator(moduleConfig.ValidatorType, moduleConfig.ValidatorParams));
+
+            foreach (DomainConfigurationElement domain in moduleConfig.Domains)
+            {
+                _domains.Add(string.Format("{0}/", domain.Name));
+
+                _domainsAcl.Add(domain.Name, GetS3Acl(domain.Acl));
+
+                if (domain.Expires != TimeSpan.Zero)
+                {
+                    _domainsExpires.Add(domain.Name, domain.Expires);
+                }
+
+                if (!string.IsNullOrEmpty(domain.ValidatorType))
+                {
+                    _domainsValidators.Add(domain.Name, CreateValidator(domain.ValidatorType, domain.ValidatorParams));
+                }
+            }
         }
 
         private S3CannedACL GetDomainACL(string domain)
@@ -321,7 +330,7 @@ namespace ASC.Data.Storage.S3
                     Headers =
                     {
                         CacheControl = string.Format("public, max-age={0}", (int)TimeSpan.FromDays(cacheDays).TotalSeconds),
-                        ExpiresUtc = DateTime.UtcNow.Add(TimeSpan.FromDays(cacheDays))
+                        Expires = DateTime.UtcNow.Add(TimeSpan.FromDays(cacheDays))
                     }
                 };
 
@@ -661,7 +670,7 @@ namespace ASC.Data.Storage.S3
 
                     client.DeleteObject(deleteRequest);
 
-                    QuotaUsedDelete(domain, Convert.ToInt64(s3Object.Size), ownerId);
+                    QuotaUsedDelete(domain, Convert.ToInt64(s3Object.Size.GetValueOrDefault()), ownerId);
                 }
             }
         }
@@ -685,7 +694,7 @@ namespace ASC.Data.Storage.S3
 
                     client.DeleteObject(deleteRequest);
 
-                    QuotaUsedDelete(domain, Convert.ToInt64(s3Object.Size));
+                    QuotaUsedDelete(domain, Convert.ToInt64(s3Object.Size.GetValueOrDefault()));
                 }
             }
         }
@@ -704,6 +713,12 @@ namespace ASC.Data.Storage.S3
                 };
 
                 var response = client.ListObjects(request);
+
+                if (response.S3Objects == null)
+                {
+                    return;
+                }
+
                 foreach (var s3Object in response.S3Objects)
                 {
                     CopyFile(s3Object.Key, s3Object.Key.Replace(srckey, dstkey), newdomain);
@@ -745,6 +760,7 @@ namespace ASC.Data.Storage.S3
         public override string[] ListDirectoriesRelative(string domain, string path, bool recursive)
         {
             return GetS3Objects(domain, path)
+                .Where(x => x.Key.EndsWith("/"))
                 .Select(x => x.Key.Substring((MakePath(domain, path) + "/").Length))
                 .ToArray();
         }
@@ -767,7 +783,7 @@ namespace ASC.Data.Storage.S3
                     Headers =
                     {
                         CacheControl = string.Format("public, max-age={0}", (int)TimeSpan.FromDays(5).TotalSeconds),
-                        ExpiresUtc = DateTime.UtcNow.Add(TimeSpan.FromDays(5)),
+                        Expires = DateTime.UtcNow.Add(TimeSpan.FromDays(5)),
                         ContentDisposition = "attachment",
                     }
                 };
@@ -936,12 +952,12 @@ namespace ASC.Data.Storage.S3
             return policyBase64;
         }
 
-        public override string[] ListFilesRelative(string domain, string path, string pattern, bool recursive)
+        public override IEnumerable<string> ListFilesRelative(string domain, string path, string pattern, bool recursive)
         {
             return GetS3Objects(domain, path)
+                .Where(x => !x.Key.EndsWith("/"))
                 .Where(x => Wildcard.IsMatch(pattern, Path.GetFileName(x.Key)))
-                .Select(x => x.Key.Substring((MakePath(domain, path) + "/").Length).TrimStart('/'))
-                .ToArray();
+                .Select(x => x.Key.Substring((MakePath(domain, path) + "/").Length).TrimStart('/'));
         }
 
         private bool CheckKey(string domain, string key)
@@ -1016,9 +1032,9 @@ namespace ASC.Data.Storage.S3
             {
                 var request = new ListObjectsRequest { BucketName = _bucket, Prefix = (MakePath(domain, path)) };
                 var response = client.ListObjects(request);
-                if (response.S3Objects.Count > 0)
+                if (response.S3Objects != null && response.S3Objects.Count > 0)
                 {
-                    return response.S3Objects[0].Size;
+                    return response.S3Objects[0].Size.GetValueOrDefault();
                 }
                 throw new FileNotFoundException("file not found", path);
             }
@@ -1032,7 +1048,7 @@ namespace ASC.Data.Storage.S3
                 var response = await client.ListObjectsAsync(request);
                 if (response.S3Objects.Count > 0)
                 {
-                    return response.S3Objects[0].Size;
+                    return response.S3Objects[0].Size.GetValueOrDefault();
                 }
                 throw new FileNotFoundException("file not found", path);
             }
@@ -1045,7 +1061,7 @@ namespace ASC.Data.Storage.S3
 
             return GetS3Objects(domain, path)
                 .Where(x => Wildcard.IsMatch("*.*", Path.GetFileName(x.Key)))
-                .Sum(x => x.Size);
+                .Sum(x => x.Size.GetValueOrDefault());
         }
 
         public override long ResetQuota(string domain)
@@ -1054,8 +1070,8 @@ namespace ASC.Data.Storage.S3
             {
                 var objects = GetS3Objects(domain);
                 var size = objects.Sum(s3Object => s3Object.Size);
-                QuotaController.QuotaUsedSet(_modulename, domain, _dataList.GetData(domain), size);
-                return size;
+                QuotaController.QuotaUsedSet(_modulename, domain, _dataList.GetData(domain), size.GetValueOrDefault());
+                return size.GetValueOrDefault();
             }
             return 0;
         }
@@ -1063,7 +1079,7 @@ namespace ASC.Data.Storage.S3
         public override long GetUsedQuota(string domain)
         {
             var objects = GetS3Objects(domain);
-            return objects.Sum(s3Object => s3Object.Size);
+            return objects.Sum(s3Object => s3Object.Size.GetValueOrDefault());
         }
 
         public override Uri Copy(string srcdomain, string srcpath, string newdomain, string newpath)
@@ -1092,11 +1108,17 @@ namespace ASC.Data.Storage.S3
                 var request = new ListObjectsRequest { BucketName = _bucket, Prefix = srckey };
 
                 var response = client.ListObjects(request);
+
+                if (response.S3Objects == null)
+                {
+                    return;
+                }
+
                 foreach (var s3Object in response.S3Objects)
                 {
                     CopyFile(s3Object.Key, s3Object.Key.Replace(srckey, dstkey), newdomain);
 
-                    QuotaUsedAdd(newdomain, s3Object.Size);
+                    QuotaUsedAdd(newdomain, s3Object.Size.GetValueOrDefault());
                 }
             }
         }
@@ -1117,9 +1139,12 @@ namespace ASC.Data.Storage.S3
                 do
                 {
                     response = client.ListObjects(request);
-                    objects.AddRange(response.S3Objects.Where(entry => CheckKey(domain, entry.Key)));
+                    if (response.S3Objects != null)
+                    {
+                        objects.AddRange(response.S3Objects.Where(entry => CheckKey(domain, entry.Key)));
+                    }
                     request.Marker = response.NextMarker;
-                } while (response.IsTruncated);
+                } while (response.IsTruncated.GetValueOrDefault());
                 return objects;
             }
         }
@@ -1515,7 +1540,7 @@ namespace ASC.Data.Storage.S3
                 return null;
             }
 
-            var cfg = new AmazonS3CryptoConfigurationV2(SecurityProfile.V2AndLegacy)
+            var cfg = new AmazonS3CryptoConfigurationV2(SecurityProfile.V2AndLegacy, CommitmentPolicy.ForbidEncryptAllowDecrypt, ContentEncryptionAlgorithm.AesGcm)
             {
                 StorageMode = CryptoStorageMode.ObjectMetadata,
                 MaxErrorRetry = 3

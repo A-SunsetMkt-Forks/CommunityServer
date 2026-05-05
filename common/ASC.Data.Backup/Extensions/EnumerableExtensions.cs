@@ -55,7 +55,31 @@ namespace ASC.Data.Backup.Extensions
             if (parentKeySelector == null)
                 throw new ArgumentNullException("parentKeySelector");
 
-            var dic = elements.ToDictionary(keySelector, x => new TreeNode<TEntry>(x));
+            var dic = new Dictionary<TKey, TreeNode<TEntry>>();
+
+            foreach (var entry in elements)
+            {
+                if (entry == null)
+                {
+                    continue;
+                }
+
+                var key = keySelector(entry);
+                if (key == null)
+                {
+                    continue;
+                }
+
+                if (dic.ContainsKey(key))
+                {
+                    dic[key] = new TreeNode<TEntry>(entry);
+                }
+                else
+                {
+                    dic.Add(key, new TreeNode<TEntry>(entry));
+                }
+            }
+
             foreach (var keyValue in dic)
             {
                 var parentKey = parentKeySelector(keyValue.Value.Entry);

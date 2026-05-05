@@ -750,7 +750,7 @@ Mehr Information im ONLYOFFICE "Help Center":"${__HelpLink}".</value>
 
 Wir hoffen, Ihnen gefallen die integrierten ONLYOFFICE Dokumenten-Editoren. Hier sind einige nützliche Tipps:
 
-*#1. Teilen Sie Dokumente* mit anderen oder Gruppen. Setzen Sie die Berechtigungen - Nur Lesen, Kommentieren, Formulare ausfüllen, Überprüfen oder voller Zugriff. Lassen Sie andere Benutzer ihre eigenen Filter in Tabellen ohne Freigabe für andere nutzen. Schränken Sie den Download oder das Ausdrucken mittels der "ONLYOFFICE API":"https://api.onlyoffice.com/editors/config/document/permissions" ein.
+*#1. Teilen Sie Dokumente* mit anderen oder Gruppen. Setzen Sie die Berechtigungen - Nur Lesen, Kommentieren, Formulare ausfüllen, Überprüfen oder voller Zugriff. Lassen Sie andere Benutzer ihre eigenen Filter in Tabellen ohne Freigabe für andere nutzen. Schränken Sie den Download oder das Ausdrucken mittels der "ONLYOFFICE API":"https://api.onlyoffice.com/docs/docs-api/usage-api/config/document/permissions/" ein.
 
 *#2. Lernen Sie, wie das Speichern von Dokumenten funktioniert* und passen Sie dies an die eigenen Bedürfnisse an. "Erfahren Sie mehr":"https://www.onlyoffice.com/blog/2020/04/save-and-force-save-in-onlyoffice-never-lose-a-document/"
 
@@ -1128,7 +1128,7 @@ Sie haben das dauerhaft Löschen Ihres Portals [${__VirtualRootPath}](${__Virtua
 _Wichtig! Alle im Portal gespeicherten Daten und alle Registrierungs-Details werden dadurch verloren gehen und können nicht wieder hergestellt werden._
 
 #if($AutoRenew == "True")
-Bitte stelle Sie vor dem Löschen des Portals sicher, dass die automatische Rechnungsstellung ausgeschaltet ist. Sie können den Status der automatischen Rechnungsstellung in Ihrem [Avangate Account](https://secure.avangate.com/myaccount/") kontrollieren.
+Bitte stelle Sie vor dem Löschen des Portals sicher, dass die automatische Rechnungsstellung ausgeschaltet ist. Sie können den Status der automatischen Rechnungsstellung in Ihrem [Avangate Account](https://secure.avangate.com/myaccount/) kontrollieren.
 #end
 
 Wenn Sie Ihr Portal [${__VirtualRootPath}](${__VirtualRootPath}) wirklich löschen wollen, bestätigen Sie bitte die Operation mit folgendem Link:

@@ -758,7 +758,7 @@ Traduzido com a versão gratuita do tradutor - www.DeepL.com/Translator</value>
 
 Esperamos que você goste de utilizar editores integrados de documentos ONLYOFFICE. Aqui estão algumas dicas que podem ser úteis: 
 
-*#1. Compartilhar documentos* para indivíduos e grupos. Escolha seu nível de acesso - Read Only, Comment, Form Filling, Review ou Full Access. Deixe que outros usuários apliquem seus próprios filtros em planilhas sem perturbar os co-autores. Restringir download e impressão usando "ONLYOFFICE API": "https://api.onlyoffice.com/editors/config/document/permissions". 
+*#1. Compartilhar documentos* para indivíduos e grupos. Escolha seu nível de acesso - Read Only, Comment, Form Filling, Review ou Full Access. Deixe que outros usuários apliquem seus próprios filtros em planilhas sem perturbar os co-autores. Restringir download e impressão usando "ONLYOFFICE API": "https://api.onlyoffice.com/docs/docs-api/usage-api/config/document/permissions/". 
 
 *#2. Saiba como funciona a economia de documentos* e ajuste-a às suas próprias necessidades. "Saiba mais": "https://www.onlyoffice.com/blog/2020/04/save-and-force-save-in-onlyoffice-never-lose-a-document/".
 
@@ -1140,7 +1140,7 @@ Você solicitou a eliminação permanente de seu portal [${__VirtualRootPath}]($
 IMPORTANTE! Todos os dados armazenados em seu portal, assim como seus dados de registro serão perdidos e não poderão ser recuperados._
 
 #if($AutoRenovar == "Verdadeiro")
-Antes de excluir o portal, certifique-se de que o faturamento automático esteja desligado. Você pode verificar o status da cobrança automática em sua [conta Avangate](https://secure.avangate.com/myaccount/").
+Antes de excluir o portal, certifique-se de que o faturamento automático esteja desligado. Você pode verificar o status da cobrança automática em sua [conta Avangate](https://secure.avangate.com/myaccount/).
 #final
 
 Se você ainda quiser excluir seu portal [${__VirtualRootPath}](${__VirtualRootPath}), por favor, siga o link abaixo para confirmar a operação:

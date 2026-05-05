@@ -32,28 +32,28 @@ namespace ASC.Common.Tests.Data
         public void JunctuinTest()
         {
             var exp = Exp.Eq("A", 0) & (Exp.Eq("B", 0) | Exp.Eq("C", 0));
-            Assert.AreEqual(exp.ToString(), "A = ? and (B = ? or C = ?)");
+            Assert.AreEqual("A = ? and (B = ? or C = ?)", exp.ToString());
 
             exp = Exp.Eq("A", 0) & (Exp.Eq("B", 0) & Exp.Eq("C", 0));
-            Assert.AreEqual(exp.ToString(), "A = ? and B = ? and C = ?");
+            Assert.AreEqual("A = ? and B = ? and C = ?", exp.ToString());
 
             exp = Exp.Eq("A", 0) | (Exp.Eq("B", 0) | Exp.Eq("C", 0));
-            Assert.AreEqual(exp.ToString(), "A = ? or B = ? or C = ?");
+            Assert.AreEqual("A = ? or B = ? or C = ?", exp.ToString());
 
             exp = (Exp.Eq("A", 0) & Exp.Eq("B", 0)) | Exp.Eq("C", 0);
-            Assert.AreEqual(exp.ToString(), "(A = ? and B = ?) or C = ?");
+            Assert.AreEqual("(A = ? and B = ?) or C = ?", exp.ToString());
 
             exp = (Exp.Eq("A", 0) & Exp.Eq("B", 0)) & Exp.Eq("C", 0) | Exp.Eq("D", 0);
-            Assert.AreEqual(exp.ToString(), "(A = ? and B = ? and C = ?) or D = ?");
+            Assert.AreEqual("(A = ? and B = ? and C = ?) or D = ?", exp.ToString());
 
             exp = (Exp.Eq("A", 0) & Exp.Eq("B", 0)) | (Exp.Eq("C", 0) & Exp.Eq("D", 0));
-            Assert.AreEqual(exp.ToString(), "(A = ? and B = ?) or (C = ? and D = ?)");
+            Assert.AreEqual("(A = ? and B = ?) or (C = ? and D = ?)", exp.ToString());
 
             exp = (Exp.Eq("A", 0) | Exp.Eq("B", 0)) & Exp.Eq("C", 0);
-            Assert.AreEqual(exp.ToString(), "(A = ? or B = ?) and C = ?");
+            Assert.AreEqual("(A = ? or B = ?) and C = ?", exp.ToString());
 
             exp = Exp.Eq("A", 0) | Exp.Eq("B", 0) & Exp.Eq("C", 0); // priority
-            Assert.AreEqual(exp.ToString(), "A = ? or (B = ? and C = ?)");
+            Assert.AreEqual("A = ? or (B = ? and C = ?)", exp.ToString());
         }
 
         [TestMethod]

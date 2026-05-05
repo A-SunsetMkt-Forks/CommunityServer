@@ -635,9 +635,10 @@ namespace ASC.Files.Core.Security
 
                     foreach (var e in filteredEntries)
                     {
-                        var adapter = findedAdapters[e.RootFolderId.ToString()];
-
-                        if (adapter == null) continue;
+                        if (!findedAdapters.TryGetValue(e.RootFolderId.ToString(), out var adapter) || adapter == null)
+                        {
+                            continue;
+                        }
 
                         if (adapter.CanRead(e, userId) &&
                             adapter.CanCreate(e, userId) &&
@@ -720,7 +721,11 @@ namespace ASC.Files.Core.Security
             }
 
             // restore entries order
-            result.Sort((x, y) => order[x.UniqID].CompareTo(order[y.UniqID]));
+            result.Sort((x, y) => {
+                var xOreder = order.ContainsKey(x.UniqID) ? order[x.UniqID] : -1;
+                var yOreder = order.ContainsKey(y.UniqID) ? order[y.UniqID] : -1;
+                return xOreder.CompareTo(yOreder);
+            });
             return result;
         }
 

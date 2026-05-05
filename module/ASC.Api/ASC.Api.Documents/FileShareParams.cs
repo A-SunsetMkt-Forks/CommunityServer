@@ -28,6 +28,8 @@ namespace ASC.Api.Documents
     [DataContract(Name = "share", Namespace = "")]
     public class FileShareParams
     {
+        private FileShare access;
+
         /// <summary>
         /// </summary>
         /// <example name="shareTo">2fdfe577-3c26-4736-9df9-b5a683bb8520</example>
@@ -40,7 +42,19 @@ namespace ASC.Api.Documents
         /// <example name="access">0</example>
         /// <order>1</order>
         [DataMember(Name = "access", Order = 1)]
-        public FileShare Access { get; set; }
+        public FileShare Access
+        {
+            get
+            {
+                return access;
+            }
+            set
+            {
+                access = Enum.IsDefined(typeof(FileShare), value)
+                    ? value
+                    : throw new ArgumentOutOfRangeException("access");
+            }
+        }
 
         /// <summary>
         /// </summary>

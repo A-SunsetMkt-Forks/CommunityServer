@@ -169,7 +169,10 @@ namespace ASC.Web.Core.Users
 
                         try
                         {
-                            storage.DeleteFiles("", data.UserID.ToString() + "*.*", false);
+                            if (storage.IsDirectory(""))
+                            {
+                                storage.DeleteFiles("", data.UserID.ToString() + "*.*", false);
+                            }
                         }
                         catch (Exception ex)
                         {

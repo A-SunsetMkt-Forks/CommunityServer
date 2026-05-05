@@ -805,7 +805,7 @@ Hai richiesto la rimozione definitiva del tuo portale "${__VirtualRootPath}":"${
 *Importante! Tutti i dati memorizzati sul tuo portale, così come i tuoi dati di registrazione, saranno persi e non possono essere recuperati. *
 
 #if($AutoRenew == "True")
-Prima di procedere all'eliminazione del portale, assicurati che la fatturazione automatica sia disattivata. Puoi verificare lo stato della fatturazione automatica nel tuo account"account Avangate":"https://secure.avangate.com/myaccount/".
+Prima di procedere all'eliminazione del portale, assicurati che la fatturazione automatica sia disattivata. Puoi verificare lo stato della fatturazione automatica nel tuo "account Avangate":"https://secure.avangate.com/myaccount/".
 #end
 
 Se vuoi ancora eliminare il tuo portale "${__VirtualRootPath}":"${__VirtualRootPath}" andare sul link seguente per confermare l'operazione:

@@ -61,20 +61,20 @@ w <a href=""http://mediaserver:8080/Products/Community/Modules/Blogs/UserPage.as
 
             //var advancedFormating = HtmlUtil.GetText(html, true);
             var advancedFormating2 = HtmlUtil.GetText(html,40);
-            Assert.IsTrue(advancedFormating2.Length <= 40);
+            Assert.IsLessThanOrEqualTo(40, advancedFormating2.Length);
 
             var advancedFormating3 = HtmlUtil.GetText(html, 40, "...");
-            Assert.IsTrue(advancedFormating3.Length <= 40);
-            StringAssert.EndsWith(advancedFormating3, "...");
+            Assert.IsLessThanOrEqualTo(40, advancedFormating3.Length);
+            Assert.EndsWith("...", advancedFormating3);
 
             var empty = HtmlUtil.GetText(string.Empty);
             Assert.AreEqual(string.Empty, empty);
 
             var invalid = HtmlUtil.GetText("This is not html <div>");
-            Assert.AreEqual(invalid, "This is not html");
+            Assert.AreEqual("This is not html", invalid);
 
             var xss = HtmlUtil.GetText("<script>alert(1);</script> <style>html{color:#444}</style>This is not html <div on click='javascript:alert(1);'>");
-            Assert.AreEqual(xss, "This is not html");
+            Assert.AreEqual("This is not html", xss);
 
             //var litleText = HtmlUtil.GetText("12345678901234567890", 20, "...",true);
 
@@ -82,14 +82,14 @@ w <a href=""http://mediaserver:8080/Products/Community/Modules/Blogs/UserPage.as
             Assert.AreEqual(string.Empty, test1);
 
             var test2 = HtmlUtil.GetText("text with \r\n line breaks",20);
-            Assert.IsTrue(test2.Length <= 20);
+            Assert.IsLessThanOrEqualTo(20, test2.Length);
 
             var test3 = HtmlUtil.GetText("long \r\n text \r\n with \r\n text with \r\n line breaks", 20);
-            Assert.IsTrue(test3.Length <= 20);
+            Assert.IsLessThanOrEqualTo(20, test3.Length);
 
             var test4 = HtmlUtil.GetText("text text text text text text text text!", 20);
-            Assert.IsTrue(test3.Length <= 20);
-            StringAssert.StartsWith(test4, "text text text");
+            Assert.IsLessThanOrEqualTo(20, test3.Length);
+            Assert.StartsWith("text text text", test4);
         }
     }
 }

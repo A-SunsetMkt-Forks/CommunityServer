@@ -119,8 +119,11 @@ namespace ASC.Core.Common.Tests
 
         private void DeleteQuotaRow(TenantQuotaRow row)
         {
-            var d = new SqlDelete(DbQuotaService.tenants_quotarow).Where("tenant", row.Tenant).Where("path", row.Path);
-            DbManager.FromHttpContext("core").ExecuteNonQuery(d);
+            using (var dbManager = new DbManager("core"))
+            {
+                var d = new SqlDelete(DbQuotaService.tenants_quotarow).Where("tenant", row.Tenant).Where("path", row.Path);
+                dbManager.ExecuteNonQuery(d);
+            }
         }
     }
 }

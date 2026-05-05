@@ -18,6 +18,7 @@ geo $ip_external {
      default 1;
      {{DOCKER_APP_SUBNET}} 0;
      127.0.0.1 0;
+     ::1 0;
 }
 
 map $http_host $this_host {

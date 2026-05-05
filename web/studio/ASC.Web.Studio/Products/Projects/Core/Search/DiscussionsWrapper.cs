@@ -19,6 +19,8 @@ using ASC.ElasticSearch;
 using ASC.Projects.Core.Domain;
 using ASC.Web.Projects.Configuration;
 
+using Mapster;
+
 namespace ASC.Web.Projects.Core.Search
 {
     public sealed class DiscussionsWrapper : Wrapper
@@ -33,7 +35,7 @@ namespace ASC.Web.Projects.Core.Search
 
         public static implicit operator DiscussionsWrapper(Message message)
         {
-            return ProductEntryPoint.Mapper.Map<DiscussionsWrapper>(message);
+            return message.Adapt<DiscussionsWrapper>(ProductEntryPoint.Config);
         }
     }
 }

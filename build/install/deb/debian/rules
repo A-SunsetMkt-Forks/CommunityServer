@@ -4,6 +4,8 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+export DPKG_DEB_COMPRESSION=xz
+
 %:
 	dh $@ --with=systemd
 
@@ -37,3 +39,6 @@ execute_after_dh_fixperms:
 	"debian/{{package_sysname}}-communityserver/etc/{{package_sysname}}/communityserver/" \
 	"debian/{{package_sysname}}-communityserver/var/www/{{package_sysname}}/" \
 	-type f  -regex '.*\(json\|config\)' ! -path '*node_modules*' -exec chmod o-rwx {} \;
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz

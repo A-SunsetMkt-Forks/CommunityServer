@@ -202,7 +202,7 @@ namespace ASC.Web.Core.Client.Bundling
 
                                     var cache = TimeSpan.FromDays(365);
                                     request.Headers.CacheControl = string.Format("public, max-age={0}", (int)cache.TotalSeconds);
-                                    request.Headers.ExpiresUtc = DateTime.UtcNow.Add(cache);
+                                    request.Headers.Expires = DateTime.UtcNow.Add(cache);
                                     request.Headers["x-amz-meta-etag"] = checksum;
 
                                     s3.PutObject(request);

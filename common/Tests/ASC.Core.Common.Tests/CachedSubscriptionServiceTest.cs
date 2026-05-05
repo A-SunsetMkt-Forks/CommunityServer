@@ -36,7 +36,7 @@ namespace ASC.Core.Common.Tests
         }
 
 
-        [ClassInitialize]
+        [TestInitialize]
         public void ClearData()
         {
             service.RemoveSubscriptions(2024, "sourceId2", "actionId2");
@@ -66,16 +66,16 @@ namespace ASC.Core.Common.Tests
             service.SaveSubscription(sb4);
 
             var subscriptions = service.GetSubscriptions(2024, "sourceId1", "actionId1", "recipientId1", "objectId1");
-            Assert.AreEqual(subscriptions.Count(), 1);
+            Assert.AreEqual(1, subscriptions.Count());
 
             subscriptions = service.GetSubscriptions(2024, "sourceId1", "actionId1", null, "objectId1");
-            Assert.AreEqual(subscriptions.Count(), 1);
+            Assert.AreEqual(1, subscriptions.Count());
 
             subscriptions = service.GetSubscriptions(2024, "sourceId1", "actionId1", null, null);
-            Assert.AreEqual(subscriptions.Count(), 0);
+            Assert.AreEqual(0, subscriptions.Count());
 
             subscriptions = service.GetSubscriptions(2024, "sourceId2", "actionId2");
-            Assert.AreEqual(subscriptions.Count(), 3);
+            Assert.AreEqual(3, subscriptions.Count());
 
             var subscription = service.GetSubscription(2024, "sourceId2", "actionId2", "recipientId3", "objectId3");
             CompareSubscriptions(sb3, subscription);
@@ -111,11 +111,11 @@ namespace ASC.Core.Common.Tests
             service.SetSubscriptionMethod(sm2);
 
             var methods = service.GetSubscriptionMethods(2024, "sourceId11", "actionId11", "recipientId11");
-            Assert.AreEqual(methods.Count(), 1);
+            Assert.AreEqual(1, methods.Count());
             CompareSubscriptionMethods(methods.ElementAt(0), sm1);
 
             methods = service.GetSubscriptionMethods(2024, "sourceId22", "actionId22", "recipientId22");
-            Assert.AreEqual(methods.Count(), 1);
+            Assert.AreEqual(1, methods.Count());
             CompareSubscriptionMethods(methods.ElementAt(0), sm2);
 
             sm2.Methods = null;

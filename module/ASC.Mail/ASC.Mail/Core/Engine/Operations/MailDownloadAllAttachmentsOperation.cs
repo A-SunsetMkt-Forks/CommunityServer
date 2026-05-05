@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 
 using ASC.Common;
@@ -98,12 +99,28 @@ namespace ASC.Mail.Core.Engine.Operations
 
                 using (var stream = TempStream.Create())
                 {
-                    using (var zip = new ZipOutputStream(stream))
+                    var codec = new StringCodec
+                    {
+                        ForceZipLegacyEncoding = true,
+                        CodePage = StringCodec.SystemDefaultCodePage
+                    };
+
+                    // https://github.com/icsharpcode/SharpZipLib/issues/776
+                    // Use reflection to access non-public constructor ZipOutputStream(Stream, StringCodec)
+                    var ctor = typeof(ZipOutputStream).GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        Type.DefaultBinder,
+                        new Type[] { typeof(Stream), typeof(StringCodec) },
+                        null);
+
+                    var zip = ctor == null ? new ZipOutputStream(stream) : (ZipOutputStream)ctor.Invoke(new object[] { stream, codec });
+
+                    using (zip)
                     {
                         zip.IsStreamOwner = false;
                         zip.SetLevel(3);
                         zip.UseZip64 = UseZip64.Dynamic;
-                        ZipStrings.UseUnicode = true;
+                        //ZipStrings.UseUnicode = true;
 
                         var attachmentsCount = attachments.Count;
                         var progressMaxValue = (int)MailOperationDownloadAllAttachmentsProgress.ArchivePreparation;

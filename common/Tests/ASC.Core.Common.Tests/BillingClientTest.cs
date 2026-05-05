@@ -39,8 +39,8 @@ namespace ASC.Core.Common.Tests
         public void GetLastPaymentTest()
         {
             var p = billingClient.GetLastPayment("208761");
-            Assert.AreEqual(p.ProductId, "1");
-            Assert.AreEqual(p.EndDate, new DateTime(2012, 5, 8, 13, 36, 30));
+            Assert.AreEqual("1", p.ProductId);
+            Assert.AreEqual(new DateTime(2012, 5, 8, 13, 36, 30), p.EndDate);
             Assert.IsFalse(p.Autorenewal);
         }
 
@@ -49,14 +49,14 @@ namespace ASC.Core.Common.Tests
         {
             var payments = billingClient.GetPayments("918").ToList();
             Assert.AreEqual(10, payments.Count);
-            Assert.AreEqual(payments[0].ProductRef, "1");
-            Assert.AreEqual(payments[0].CartId, "11806812");
-            Assert.AreEqual(payments[0].PaymentCurrency, "EUR");
-            Assert.AreEqual(payments[0].PaymentDate, new DateTime(2012, 4, 8, 13, 36, 30));
-            Assert.AreEqual(payments[0].Email, "digiredo@mac.com");
-            Assert.AreEqual(payments[0].PaymentMethod, "PayPal");
-            Assert.AreEqual(payments[0].FName + payments[0].LName, "Erik van der Zijden");
-            Assert.AreEqual(payments[0].Price, 37.5);
+            Assert.AreEqual("1", payments[0].ProductRef);
+            Assert.AreEqual("11806812", payments[0].CartId);
+            Assert.AreEqual("EUR", payments[0].PaymentCurrency);
+            Assert.AreEqual(new DateTime(2012, 4, 8, 13, 36, 30), payments[0].PaymentDate);
+            Assert.AreEqual("digiredo@mac.com", payments[0].Email);
+            Assert.AreEqual("PayPal", payments[0].PaymentMethod);
+            Assert.AreEqual("Erik van der Zijden", payments[0].FName + payments[0].LName);
+            Assert.AreEqual(37.5m, payments[0].Price);
         }
 
         [TestMethod]

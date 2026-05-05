@@ -50,9 +50,9 @@ namespace ASC.Common.Tests.Security.Cryptography
         [TestMethod]
         public void GetEmailKey_MillisecondDistanceDifference()
         {
-            var k1 = EmailValidationKeyProvider.GetEmailKey("sm_anton@mail.ru");
+            var k1 = EmailValidationKeyProvider.GetEmailKey("sm_anton@test.com");
             System.Threading.Thread.Sleep(15);
-            var k2 = EmailValidationKeyProvider.GetEmailKey("sm_anton@mail.ru");
+            var k2 = EmailValidationKeyProvider.GetEmailKey("sm_anton@test.com");
 
             Assert.AreNotEqual(k1, k2);
         }
@@ -60,19 +60,19 @@ namespace ASC.Common.Tests.Security.Cryptography
         [TestMethod]
         public void ValidateKeyImmediate()
         {
-            var k1 = EmailValidationKeyProvider.GetEmailKey("sm_anton@mail.ru");
-            Assert.AreEqual(EmailValidationKeyProvider.ValidateEmailKey("sm_anton@mail.ru", k1), EmailValidationKeyProvider.ValidationResult.Ok);
-            Assert.AreEqual(EmailValidationKeyProvider.ValidateEmailKey("sm_anton@mail.ru2", k1), EmailValidationKeyProvider.ValidationResult.Invalid);
+            var k1 = EmailValidationKeyProvider.GetEmailKey("sm_anton@test.com");
+            Assert.AreEqual(EmailValidationKeyProvider.ValidationResult.Ok, EmailValidationKeyProvider.ValidateEmailKey("sm_anton@test.com", k1));
+            Assert.AreEqual(EmailValidationKeyProvider.ValidationResult.Invalid, EmailValidationKeyProvider.ValidateEmailKey("sm_anton@test.com2", k1));
         }
 
         [TestMethod]
         public void ValidateKey_Delayed()
         {
-            var k1 = EmailValidationKeyProvider.GetEmailKey("sm_anton@mail.ru");
+            var k1 = EmailValidationKeyProvider.GetEmailKey("sm_anton@test.com");
             System.Threading.Thread.Sleep(100);
-            Assert.AreEqual(EmailValidationKeyProvider.ValidateEmailKey("sm_anton@mail.ru", k1, TimeSpan.FromMilliseconds(150)), EmailValidationKeyProvider.ValidationResult.Ok);
+            Assert.AreEqual(EmailValidationKeyProvider.ValidationResult.Ok, EmailValidationKeyProvider.ValidateEmailKey("sm_anton@test.com", k1, TimeSpan.FromMilliseconds(150)));
             System.Threading.Thread.Sleep(100);
-            Assert.AreEqual(EmailValidationKeyProvider.ValidateEmailKey("sm_anton@mail.ru", k1, TimeSpan.FromMilliseconds(150)), EmailValidationKeyProvider.ValidationResult.Expired);
+            Assert.AreEqual(EmailValidationKeyProvider.ValidationResult.Expired, EmailValidationKeyProvider.ValidateEmailKey("sm_anton@test.com", k1, TimeSpan.FromMilliseconds(150)));
         }
     }
 }

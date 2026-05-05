@@ -267,10 +267,7 @@ namespace ASC.Web.Studio.UserControls.Users
                 }
             }
 
-            if (UserInfo.Status != EmployeeStatus.Terminated)
-            {
-                Groups = CoreContext.UserManager.GetUserGroups(UserInfo.ID).ToList();
-            }
+            Groups = CoreContext.UserManager.GetUserGroups(UserInfo.ID).ToList();
         }
 
         private RoleUser GetRole()

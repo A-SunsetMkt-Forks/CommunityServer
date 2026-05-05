@@ -105,10 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.CloudFront">
-      <Version>3.7.3.20</Version>
+      <Version>4.0.12.4</Version>
     </PackageReference>
     <PackageReference Include="AWSSDK.S3">
-      <Version>3.7.1.29</Version>
+      <Version>4.0.19.2</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>

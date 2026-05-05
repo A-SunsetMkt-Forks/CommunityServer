@@ -1,0 +1,162 @@
+DELIMITER DLM00
+
+DROP PROCEDURE IF EXISTS upgrade128 DLM00
+
+CREATE PROCEDURE upgrade128()
+BEGIN
+
+    insert ignore into files_converts (input, output) values ('.hml', '.docm');
+    insert ignore into files_converts (input, output) values ('.hml', '.docx');
+    insert ignore into files_converts (input, output) values ('.hml', '.dotm');
+    insert ignore into files_converts (input, output) values ('.hml', '.dotx');
+    insert ignore into files_converts (input, output) values ('.hml', '.epub');
+    insert ignore into files_converts (input, output) values ('.hml', '.fb2');
+    insert ignore into files_converts (input, output) values ('.hml', '.html');
+    insert ignore into files_converts (input, output) values ('.hml', '.md');
+    insert ignore into files_converts (input, output) values ('.hml', '.odt');
+    insert ignore into files_converts (input, output) values ('.hml', '.ott');
+    insert ignore into files_converts (input, output) values ('.hml', '.pdf');
+    insert ignore into files_converts (input, output) values ('.hml', '.rtf');
+    insert ignore into files_converts (input, output) values ('.hml', '.txt');
+    insert ignore into files_converts (input, output) values ('.hwp', '.docm');
+    insert ignore into files_converts (input, output) values ('.hwp', '.docx');
+    insert ignore into files_converts (input, output) values ('.hwp', '.dotm');
+    insert ignore into files_converts (input, output) values ('.hwp', '.dotx');
+    insert ignore into files_converts (input, output) values ('.hwp', '.epub');
+    insert ignore into files_converts (input, output) values ('.hwp', '.fb2');
+    insert ignore into files_converts (input, output) values ('.hwp', '.html');
+    insert ignore into files_converts (input, output) values ('.hwp', '.odt');
+    insert ignore into files_converts (input, output) values ('.hwp', '.ott');
+    insert ignore into files_converts (input, output) values ('.hwp', '.pdf');
+    insert ignore into files_converts (input, output) values ('.hwp', '.rtf');
+    insert ignore into files_converts (input, output) values ('.hwp', '.txt');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.docm');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.docx');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.dotm');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.dotx');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.epub');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.fb2');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.html');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.odt');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.ott');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.pdf');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.rtf');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.txt');
+    insert ignore into files_converts (input, output) values ('.key', '.odp');
+    insert ignore into files_converts (input, output) values ('.key', '.otp');
+    insert ignore into files_converts (input, output) values ('.key', '.pdf');
+    insert ignore into files_converts (input, output) values ('.key', '.potm');
+    insert ignore into files_converts (input, output) values ('.key', '.potx');
+    insert ignore into files_converts (input, output) values ('.key', '.ppsm');
+    insert ignore into files_converts (input, output) values ('.key', '.ppsx');
+    insert ignore into files_converts (input, output) values ('.key', '.pptm');
+    insert ignore into files_converts (input, output) values ('.key', '.pptx');
+    insert ignore into files_converts (input, output) values ('.md', '.docm');
+    insert ignore into files_converts (input, output) values ('.md', '.docx');
+    insert ignore into files_converts (input, output) values ('.md', '.dotm');
+    insert ignore into files_converts (input, output) values ('.md', '.dotx');
+    insert ignore into files_converts (input, output) values ('.md', '.epub');
+    insert ignore into files_converts (input, output) values ('.md', '.fb2');
+    insert ignore into files_converts (input, output) values ('.md', '.html');
+    insert ignore into files_converts (input, output) values ('.md', '.odt');
+    insert ignore into files_converts (input, output) values ('.md', '.ott');
+    insert ignore into files_converts (input, output) values ('.md', '.pdf');
+    insert ignore into files_converts (input, output) values ('.md', '.rtf');
+    insert ignore into files_converts (input, output) values ('.md', '.txt');
+    insert ignore into files_converts (input, output) values ('.numbers', '.csv');
+    insert ignore into files_converts (input, output) values ('.numbers', '.ods');
+    insert ignore into files_converts (input, output) values ('.numbers', '.ots');
+    insert ignore into files_converts (input, output) values ('.numbers', '.pdf');
+    insert ignore into files_converts (input, output) values ('.numbers', '.xlsm');
+    insert ignore into files_converts (input, output) values ('.numbers', '.xlsx');
+    insert ignore into files_converts (input, output) values ('.numbers', '.xltm');
+    insert ignore into files_converts (input, output) values ('.numbers', '.xltx');
+    insert ignore into files_converts (input, output) values ('.odg', '.odp');
+    insert ignore into files_converts (input, output) values ('.odg', '.otp');
+    insert ignore into files_converts (input, output) values ('.odg', '.pdf');
+    insert ignore into files_converts (input, output) values ('.odg', '.potm');
+    insert ignore into files_converts (input, output) values ('.odg', '.potx');
+    insert ignore into files_converts (input, output) values ('.odg', '.ppsm');
+    insert ignore into files_converts (input, output) values ('.odg', '.ppsx');
+    insert ignore into files_converts (input, output) values ('.odg', '.pptm');
+    insert ignore into files_converts (input, output) values ('.odg', '.pptx');
+    insert ignore into files_converts (input, output) values ('.pages', '.docm');
+    insert ignore into files_converts (input, output) values ('.pages', '.docx');
+    insert ignore into files_converts (input, output) values ('.pages', '.dotm');
+    insert ignore into files_converts (input, output) values ('.pages', '.dotx');
+    insert ignore into files_converts (input, output) values ('.pages', '.epub');
+    insert ignore into files_converts (input, output) values ('.pages', '.fb2');
+    insert ignore into files_converts (input, output) values ('.pages', '.html');
+    insert ignore into files_converts (input, output) values ('.pages', '.odt');
+    insert ignore into files_converts (input, output) values ('.pages', '.ott');
+    insert ignore into files_converts (input, output) values ('.pages', '.pdf');
+    insert ignore into files_converts (input, output) values ('.pages', '.rtf');
+    insert ignore into files_converts (input, output) values ('.pages', '.txt');
+    insert ignore into files_converts (input, output) values ('.tsv', '.csv');
+    insert ignore into files_converts (input, output) values ('.tsv', '.ods');
+    insert ignore into files_converts (input, output) values ('.tsv', '.ots');
+    insert ignore into files_converts (input, output) values ('.tsv', '.pdf');
+    insert ignore into files_converts (input, output) values ('.tsv', '.xlsm');
+    insert ignore into files_converts (input, output) values ('.tsv', '.xlsx');
+    insert ignore into files_converts (input, output) values ('.tsv', '.xltm');
+    insert ignore into files_converts (input, output) values ('.tsv', '.xltx');
+    insert ignore into files_converts (input, output) values ('.vsdm', '.pdf');
+    insert ignore into files_converts (input, output) values ('.vsdx', '.pdf');
+    insert ignore into files_converts (input, output) values ('.vssm', '.pdf');
+    insert ignore into files_converts (input, output) values ('.vssx', '.pdf');
+    insert ignore into files_converts (input, output) values ('.vstm', '.pdf');
+    insert ignore into files_converts (input, output) values ('.vstx', '.pdf');
+
+    insert ignore into files_converts (input, output) values ('.dps', '.txt');
+    insert ignore into files_converts (input, output) values ('.dpt', '.txt');
+    insert ignore into files_converts (input, output) values ('.fodp', '.txt');
+    insert ignore into files_converts (input, output) values ('.key', '.txt');
+    insert ignore into files_converts (input, output) values ('.odg', '.txt');
+    insert ignore into files_converts (input, output) values ('.odp', '.txt');
+    insert ignore into files_converts (input, output) values ('.otp', '.txt');
+    insert ignore into files_converts (input, output) values ('.pot', '.txt');
+    insert ignore into files_converts (input, output) values ('.potm', '.txt');
+    insert ignore into files_converts (input, output) values ('.potx', '.txt');
+    insert ignore into files_converts (input, output) values ('.pps', '.txt');
+    insert ignore into files_converts (input, output) values ('.ppsm', '.txt');
+    insert ignore into files_converts (input, output) values ('.ppsx', '.txt');
+    insert ignore into files_converts (input, output) values ('.ppt', '.txt');
+    insert ignore into files_converts (input, output) values ('.pptm', '.txt');
+    insert ignore into files_converts (input, output) values ('.pptx', '.txt');
+    insert ignore into files_converts (input, output) values ('.sxi', '.txt');
+
+    insert ignore into files_converts (input, output) values ('.doc', '.md');
+    insert ignore into files_converts (input, output) values ('.docm', '.md');
+    insert ignore into files_converts (input, output) values ('.docx', '.md');
+    insert ignore into files_converts (input, output) values ('.dot', '.md');
+    insert ignore into files_converts (input, output) values ('.dotm', '.md');
+    insert ignore into files_converts (input, output) values ('.dotx', '.md');
+    insert ignore into files_converts (input, output) values ('.epub', '.md');
+    insert ignore into files_converts (input, output) values ('.fb2', '.md');
+    insert ignore into files_converts (input, output) values ('.fodt', '.md');
+    insert ignore into files_converts (input, output) values ('.htm', '.md');
+    insert ignore into files_converts (input, output) values ('.html', '.md');
+    insert ignore into files_converts (input, output) values ('.hwp', '.md');
+    insert ignore into files_converts (input, output) values ('.hwpx', '.md');
+    insert ignore into files_converts (input, output) values ('.mht', '.md');
+    insert ignore into files_converts (input, output) values ('.mhtml', '.md');
+    insert ignore into files_converts (input, output) values ('.odt', '.md');
+    insert ignore into files_converts (input, output) values ('.ott', '.md');
+    insert ignore into files_converts (input, output) values ('.oxps', '.md');
+    insert ignore into files_converts (input, output) values ('.pages', '.md');
+    insert ignore into files_converts (input, output) values ('.pdf', '.md');
+    insert ignore into files_converts (input, output) values ('.rtf', '.md');
+    insert ignore into files_converts (input, output) values ('.stw', '.md');
+    insert ignore into files_converts (input, output) values ('.sxw', '.md');
+    insert ignore into files_converts (input, output) values ('.txt', '.md');
+    insert ignore into files_converts (input, output) values ('.wps', '.md');
+    insert ignore into files_converts (input, output) values ('.wpt', '.md');
+    insert ignore into files_converts (input, output) values ('.xml', '.md');
+    insert ignore into files_converts (input, output) values ('.xps', '.md');
+
+
+END DLM00
+
+CALL upgrade128() DLM00
+
+DELIMITER ;

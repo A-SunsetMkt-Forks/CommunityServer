@@ -48,6 +48,7 @@ namespace ASC.Core.Billing
         private readonly CoreConfiguration config;
         private readonly bool test;
         private readonly int paymentDelay;
+        private readonly string dsregion;
 
         public readonly static int ACTIVE_USERS_MIN;
         public readonly static int ACTIVE_USERS_MAX;
@@ -89,6 +90,7 @@ namespace ASC.Core.Billing
             CacheExpiration = DEFAULT_CACHE_EXPIRATION;
             test = ConfigurationManagerExtension.AppSettings["core.payment-test"] == "true";
             int.TryParse(ConfigurationManagerExtension.AppSettings["core.payment-delay"], out paymentDelay);
+            dsregion = IsDocspace ? ConfigurationManagerExtension.AppSettings[$"core.payment-dsregion.{connectionString.Name}"] : null;
         }
 
 
@@ -141,7 +143,7 @@ namespace ASC.Core.Billing
                                 cache.Insert(key, asynctariff, DateTime.UtcNow.Add(GetCacheExpiration()));
                             }
                         }
-                        catch (BillingNotFoundException)
+                        catch (BillingNotFoundException billingNotFoundException)
                         {
                             var q = quotaService.GetTenantQuota(tariff.QuotaId);
 
@@ -152,6 +154,8 @@ namespace ASC.Core.Billing
                                 && !q.Open
                                 && !q.Custom)
                             {
+                                LogError(billingNotFoundException, tenantId.ToString());
+
                                 var asynctariff = Tariff.CreateDefault();
                                 asynctariff.DueDate = DateTime.Today.AddDays(-1);
                                 asynctariff.Prolongable = false;
@@ -436,6 +440,28 @@ namespace ASC.Core.Billing
                 .InColumnValue("button_url", buttonUrl);
 
             ExecNonQuery(q);
+        }
+
+        public void ChangeDocspaceNonProfitTariff(int tenantId, bool isActive, string email = null, string firstName = null, string lastName = null)
+        {
+            if (!IsDocspace || !BillingClient.Configured)
+            {
+                return;
+            }
+
+            var portalId = dsregion + tenantId;
+
+            try
+            {
+                var client = GetBillingClient();
+                var result = client.ChangeDocspaceNonProfitTariff(portalId, isActive, email, firstName, lastName);
+
+                log.Debug($"ChangeDocspaceNonProfitTariff portal {portalId} isActive: {isActive} email: {email} firstName: {firstName} lastName: {lastName} result {result}");
+            }
+            catch (Exception error)
+            {
+                LogError(error, portalId);
+            }
         }
 
 

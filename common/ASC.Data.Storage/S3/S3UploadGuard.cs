@@ -84,7 +84,7 @@ namespace ASC.Data.Storage.S3
                         AbortMultipartUpload(u, s3);
                     }
 
-                    isTruncated = response.IsTruncated;
+                    isTruncated = response.IsTruncated.GetValueOrDefault();
                     nextKeyMarker = response.NextKeyMarker;
                     nextUploadIdMarker = response.NextUploadIdMarker;
                 }

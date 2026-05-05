@@ -88,6 +88,7 @@ namespace ASC.Web.Core.Files
             if (ExtsDocument.Contains(extension)) return FileType.Document;
             if (ExtsSpreadsheet.Contains(extension)) return FileType.Spreadsheet;
             if (ExtsPresentation.Contains(extension)) return FileType.Presentation;
+            if (ExtsVisio.Contains(extension)) return FileType.Visio;
             if (ExtsImage.Contains(extension)) return FileType.Image;
             if (ExtsArchive.Contains(extension)) return FileType.Archive;
             if (ExtsAudio.Contains(extension)) return FileType.Audio;
@@ -316,14 +317,20 @@ namespace ASC.Web.Core.Files
                 ".svgt", ".svgy", ".gdraw", ".webp"
             };
 
+        public static readonly List<string> ExtsVisio = new List<string>
+            {
+                ".vsdx", ".vssx", ".vstx", ".vsdm", ".vssm", ".vstm"
+            };
+
         public static readonly List<string> ExtsSpreadsheet = new List<string>
             {
                 ".xls", ".xlsx", ".xlsm",
                 ".xlt", ".xltx", ".xltm",
-                ".ods", ".fods", ".ots", ".csv",
+                ".ods", ".fods", ".ots", ".csv", ".tsv",
                 ".sxc", ".et", ".ett",
                 ".xlst", ".xlsy", ".xlsb",
-                ".gsheet"
+                ".gsheet",
+                ".numbers"
             };
 
         public static readonly List<string> ExtsPresentation = new List<string>
@@ -334,20 +341,24 @@ namespace ASC.Web.Core.Files
                 ".odp", ".fodp", ".otp",
                 ".dps", ".dpt", ".sxi",
                 ".pptt", ".ppty",
-                ".gslides"
+                ".gslides",
+                ".key",
+                ".odg"
             };
 
         public static readonly List<string> ExtsDocument = new List<string>
             {
                 ".doc", ".docx", ".docm",
                 ".dot", ".dotx", ".dotm",
-                ".odt", ".fodt", ".ott", ".rtf", ".txt",
-                ".html", ".htm", ".mht", ".mhtml", ".xml",
+                ".odt", ".fodt", ".ott", ".rtf", ".txt", ".md",
+                ".hml", ".html", ".htm", ".mht", ".mhtml", ".xml",
                 ".pdf", ".djvu", ".fb2", ".epub", ".xps", ".oxps",
                 ".sxw", ".stw", ".wps", ".wpt",
                 ".doct", ".docy",
                 ".gdoc",
-                ".docxf", ".oform"
+                ".pages",
+                ".docxf", ".oform",
+                ".hwp", ".hwpx"
             };
 
         public static readonly List<string> ExtsTemplate = new List<string>
@@ -365,7 +376,7 @@ namespace ASC.Web.Core.Files
                 { FileType.Presentation, ConfigurationManagerExtension.AppSettings["files.docservice.internal-ppt"] ?? ".pptx" }
             };
 
-        public static readonly string MasterFormExtension = ConfigurationManagerExtension.AppSettings["files.docservice.internal-form"] ?? ".docxf";
+        public static readonly string MasterFormExtension = ConfigurationManagerExtension.AppSettings["files.docservice.internal-form"] ?? ".pdf";
 
         public enum CsvDelimiter
         {

@@ -19,6 +19,8 @@ using ASC.ElasticSearch;
 using ASC.Projects.Core.Domain;
 using ASC.Web.Projects.Configuration;
 
+using Mapster;
+
 namespace ASC.Web.Projects.Core.Search
 {
     public sealed class TasksWrapper : Wrapper
@@ -36,7 +38,7 @@ namespace ASC.Web.Projects.Core.Search
 
         public static implicit operator TasksWrapper(Task task)
         {
-            return ProductEntryPoint.Mapper.Map<TasksWrapper>(task);
+            return task.Adapt<TasksWrapper>(ProductEntryPoint.Config);
             //var result = Mapper.Map<TasksWrapper>(task);
             //result.Subtasks = task.SubTasks.Select(r=> new SubtasksWrapper { Id = r.ID, Title = r.Title}).ToList();
             //return result;

@@ -181,7 +181,7 @@ namespace ASC.Api.Collections
             {
                 var includeAssemblies = new HashSet<string>();
 
-                var provider = new CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
+                var provider = new CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } });
 
                 var name = "Filter";
                 if (FilterBy != null)

@@ -250,7 +250,7 @@ ASC.Projects.ProjectsAdvansedFilter = (function () {
         if (str) {
             tmpUrl += str;
         } else {
-            tmpUrl += location.hash.substring(1);
+            tmpUrl += decodeURIComponent(location.hash.substring(1));
         }
         var results = regex.exec(tmpUrl);
         if (results == null)
@@ -260,7 +260,7 @@ ASC.Projects.ProjectsAdvansedFilter = (function () {
     };
 
     var coincidesWithFilter = function (filter) {
-        var hash = location.hash.substring(1);
+        var hash = decodeURIComponent(location.hash.substring(1));
 
         var sortOrder = getUrlParam(sortOrderFilter, hash);
         var sortBy = getUrlParam(sortByFilter, hash);
@@ -350,6 +350,11 @@ ASC.Projects.ProjectsAdvansedFilter = (function () {
             currentSettings.sorters[i].sortOrder = sortOrder;
         }
 
+        var currentTextFilter = currentSettings.filters.find(function (f) { return f.id === textFilter; })
+        if (!currentTextFilter) {
+            currentSettings.filters.push({ id: textFilter, params: { value: getUrlParam(textFilter) } });
+        }
+
         filter.advansedFilter({ filters: currentSettings.filters, sorters: currentSettings.sorters });
     };
 
@@ -376,12 +381,12 @@ ASC.Projects.ProjectsAdvansedFilter = (function () {
             switch (filterid) {
                 case meTeamMemberFilter:
                 case teamMemberFilter:
-                    data.participant = id;
+                    data.participant = getIdOrValue(params);
                     anchor = changeParamValue(anchor, teamMemberFilter, data.participant);
                     break;
                 case meProjectManagerFilter:
                 case projectManagerFilter:
-                    data.manager = id;
+                    data.manager = getIdOrValue(params);
                     anchor = changeParamValue(anchor, projectManagerFilter, data.manager);
                     break;
                 case meResponsibleForMilestoneFilter:

@@ -38,7 +38,7 @@ namespace ASC.Core.Common.Tests
         public void TenantUtilTest()
         {
             var date = TenantUtil.DateTimeNow(System.TimeZoneInfo.GetSystemTimeZones().First());
-            Assert.IsNotNull(date);
+            Assert.AreNotEqual(default, date);
         }
 
         [TestMethod]

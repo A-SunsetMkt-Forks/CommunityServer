@@ -26,6 +26,7 @@ namespace ASC.Web.Core.Files
         Image = 4,
         Spreadsheet = 5,
         Presentation = 6,
-        Document = 7
+        Document = 7,
+        Visio = 8
     }
 }

@@ -53,7 +53,7 @@ namespace ASC.BenchmarkTest
 
                 int[] result;
 
-                using (var dbManager = DbManager.FromHttpContext("core"))
+                using (var dbManager = new DbManager("core"))
                 {
                     var query = new SqlQuery("tenants_tenants t")
                      .Select("t.id", "t.alias", "t.mappeddomain", "t.version", "t.version_changed", "t.name", "t.language", "t.timezone", "t.owner_id")
@@ -63,7 +63,7 @@ namespace ASC.BenchmarkTest
                     result = dbManager.ExecuteList(query).Select(r => Convert.ToInt32(r[0])).ToArray();
                 }
 
-                using (var dbManager = DbManager.FromHttpContext("core"))
+                using (var dbManager = new DbManager("core"))
                 {
                     var query = new SqlQuery("tenants_tariff t")
                      .Select("t.id");
@@ -83,7 +83,7 @@ namespace ASC.BenchmarkTest
             {
                 int[] result;
 
-                using (var dbManager = DbManager.FromHttpContext("core"))
+                using (var dbManager = new DbManager("core"))
                 {
                     //Console.WriteLine("test");
                     var query = new SqlQuery("tenants_tenants t")
@@ -94,7 +94,7 @@ namespace ASC.BenchmarkTest
                     result = dbManager.ExecuteList(query).Select(r => Convert.ToInt32(r[0])).ToArray();
                 }
 
-                using (var dbManager = DbManager.FromHttpContext("core"))
+                using (var dbManager = new DbManager("core"))
                 {
                     var query = new SqlQuery("tenants_tariff t")
                      .Select("t.id");

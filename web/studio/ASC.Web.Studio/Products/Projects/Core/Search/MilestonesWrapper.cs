@@ -19,6 +19,8 @@ using ASC.ElasticSearch;
 using ASC.Projects.Core.Domain;
 using ASC.Web.Projects.Configuration;
 
+using Mapster;
+
 namespace ASC.Web.Projects.Core.Search
 {
     public sealed class MilestonesWrapper : Wrapper
@@ -33,7 +35,7 @@ namespace ASC.Web.Projects.Core.Search
 
         public static implicit operator MilestonesWrapper(Milestone milestone)
         {
-            return ProductEntryPoint.Mapper.Map<MilestonesWrapper>(milestone);
+            return milestone.Adapt<MilestonesWrapper>(ProductEntryPoint.Config);
         }
     }
 }

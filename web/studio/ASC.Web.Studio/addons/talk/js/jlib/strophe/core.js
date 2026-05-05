@@ -1301,6 +1301,23 @@ Strophe.Request.prototype = {
     getResponse: function ()
     {
         var node = null;
+
+        var tryParseResponseText = function (responseText) {
+            var result = null;
+            try {
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(responseText, "text/xml");
+                result = xmlDoc.documentElement;
+                var parsererror = result.getElementsByTagName("parsererror")[0];
+                if (parsererror) {
+                    console.log(parsererror);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+            return result;
+        };
+
         if (this.xhr.responseXML && this.xhr.responseXML.documentElement) {
             node = this.xhr.responseXML.documentElement;
 
@@ -1314,6 +1331,8 @@ Strophe.Request.prototype = {
             Strophe.error("invalid response received");
             Strophe.error("responseText: " + this.xhr.responseText);
             Strophe.error("responseXML: " + Strophe.serialize(this.xhr.responseXML));
+
+            node = tryParseResponseText(this.xhr.responseText);
         }
         return node;
     },

@@ -311,13 +311,13 @@ namespace ASC.Api.Calendar.iCalParser
 
             result.Description = eventObj.Description;
 
-            result.IsAllDay = eventObj.AllDayLong;
-
             result.Uid = eventObj.Uid;
 
             result.Start = new Ical.Net.DataTypes.CalDateTime(DateTime.SpecifyKind(eventObj.UtcStartDate, DateTimeKind.Utc), TimeZoneInfo.Utc.Id);
 
             result.End = new Ical.Net.DataTypes.CalDateTime(DateTime.SpecifyKind(eventObj.UtcEndDate, DateTimeKind.Utc), TimeZoneInfo.Utc.Id);
+
+            result.IsAllDay = eventObj.AllDayLong;
 
             result.Created = new Ical.Net.DataTypes.CalDateTime(DateTime.SpecifyKind(eventObj.UtcUpdateDate, DateTimeKind.Utc), TimeZoneInfo.Utc.Id);
 
@@ -418,13 +418,14 @@ namespace ASC.Api.Calendar.iCalParser
                 Summary = name,
                 Location = string.Empty,
                 Description = description,
-                IsAllDay = isAllDayLong,
                 DtStamp = new Ical.Net.DataTypes.CalDateTime(DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc), TimeZoneInfo.Utc.Id),
                 Start = new Ical.Net.DataTypes.CalDateTime(DateTime.SpecifyKind(startUtcDate, DateTimeKind.Utc), TimeZoneInfo.Utc.Id),
                 End = new Ical.Net.DataTypes.CalDateTime(DateTime.SpecifyKind(endUtcDate, DateTimeKind.Utc), TimeZoneInfo.Utc.Id),
                 RecurrenceRules = new List<Ical.Net.DataTypes.RecurrencePattern>(),
                 Status = ConvertEventStatus(status)
             };
+
+            evt.IsAllDay = isAllDayLong;
 
             var rrule = RecurrenceRule.Parse(repeatType).ToString(true);
 

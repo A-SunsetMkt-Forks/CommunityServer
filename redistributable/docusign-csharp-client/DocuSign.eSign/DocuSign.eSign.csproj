@@ -44,7 +44,7 @@ OpenAPI spec version: v2
       <HintPath>..\..\..\packages\BouncyCastle.1.8.2\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens">
-      <HintPath>..\..\..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.IdentityModel.Tokens.6.34.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -56,7 +56,7 @@ OpenAPI spec version: v2
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt">
-      <HintPath>..\..\..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <HintPath>..\..\..\packages\System.IdentityModel.Tokens.Jwt.6.34.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

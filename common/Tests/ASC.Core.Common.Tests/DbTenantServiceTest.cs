@@ -97,7 +97,7 @@ namespace ASC.Core.Common.Tests
                 UserName = "username",
                 FirstName = "first name",
                 LastName = "last name",
-                Email = "user@mail.ru"
+                Email = "user@test.com"
             };
             userService.SaveUser(t1.TenantId, user);
 
@@ -122,7 +122,7 @@ namespace ASC.Core.Common.Tests
         {
             ValidateDomain("12345", typeof(TenantTooShortException));
             ValidateDomain("123456", null);
-            ValidateDomain("трала   лалала", typeof(TenantIncorrectCharsException));
+            ValidateDomain("abc   defg", typeof(TenantIncorrectCharsException));
             ValidateDomain("abc.defg", typeof(TenantIncorrectCharsException));
             ValidateDomain("abcdef", null);
 

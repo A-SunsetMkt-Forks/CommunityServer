@@ -43,8 +43,8 @@ namespace ASC.Api.Core.Tests
             var nameValue = HttpUtility.ParseQueryString("files=11031&documents=111");
             var result = (int)Utils.Binder.Bind(typeof(int), nameValue, "files");
             var result2 = (int)Utils.Binder.Bind(typeof(int), nameValue, "documents");
-            Assert.AreEqual(result, 11031);
-            Assert.AreEqual(result2, 111);
+            Assert.AreEqual(11031, result);
+            Assert.AreEqual(111, result2);
         }
 
         [TestMethod]
@@ -53,9 +53,9 @@ namespace ASC.Api.Core.Tests
             var nameValue = HttpUtility.ParseQueryString("files[]=11031&files[]=111");
             var result = ((IEnumerable<int>)Utils.Binder.Bind(typeof(int[]), nameValue, "files")).ToArray();
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Length == 2);
-            Assert.IsTrue(result[0] == 11031);
-            Assert.IsTrue(result[1] == 111);
+            Assert.HasCount(2, result);
+            Assert.AreEqual(11031, result[0]);
+            Assert.AreEqual(111, result[1]);
         }
         [TestMethod]
         public void TestBinderWithStringArray()
@@ -63,9 +63,9 @@ namespace ASC.Api.Core.Tests
             var nameValue = HttpUtility.ParseQueryString("strings[]=string1&strings[]=string2");
             var result = Utils.Binder.Bind<string[]>(nameValue, "strings");
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Length == 2);
-            Assert.IsTrue(result[0] == "string1");
-            Assert.IsTrue(result[1] == "string2");
+            Assert.HasCount(2, result);
+            Assert.AreEqual("string1", result[0]);
+            Assert.AreEqual("string2", result[1]);
 
         }
 
@@ -166,9 +166,9 @@ namespace ASC.Api.Core.Tests
             var nameValue = HttpUtility.ParseQueryString("guids[]=2A0B1EB6-0B56-4641-A8D5-3AAE7E043E40&guids[]=DB01ED90-9E19-4c20-A454-20B9AEF4C579");
             var result = Utils.Binder.Bind<Guid[]>(nameValue, "guids");
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Length == 2);
-            Assert.IsTrue(result[0] == new Guid("2A0B1EB6-0B56-4641-A8D5-3AAE7E043E40"));
-            Assert.IsTrue(result[1] == new Guid("DB01ED90-9E19-4c20-A454-20B9AEF4C579"));
+            Assert.HasCount(2, result);
+            Assert.AreEqual(new Guid("2A0B1EB6-0B56-4641-A8D5-3AAE7E043E40"), result[0]);
+            Assert.AreEqual(new Guid("DB01ED90-9E19-4c20-A454-20B9AEF4C579"), result[1]);
 
         }
 
@@ -227,8 +227,8 @@ namespace ASC.Api.Core.Tests
             var query = @"name=New+calendar&description=&textColor=rgb(0%2C+0%2C+0)&backgroundColor=rgb(135%2C+206%2C+250)&timeZone=Arabian+Standard+Time&alertType=0&hideEvents=true&sharingOptions%5B0%5D%5BActionId%5D=read&sharingOptions%5B0%5D%5BitemId%5D=646a6cff-df57-4b83-8ffe-91a24910328c&sharingOptions%5B0%5D%5BisGroup%5D=false";
             var nameValue = HttpUtility.ParseQueryString(query);
             var result = (((SharingParam[])Utils.Binder.Bind(typeof(SharingParam[]), nameValue, "sharingOptions")));
-            Assert.AreNotEqual(string.Empty, result);
-            Assert.AreEqual(result.Length, 1);
+            Assert.IsNotNull(result);
+            Assert.HasCount(1, result);
         }
 
         [TestMethod]
@@ -239,8 +239,8 @@ namespace ASC.Api.Core.Tests
             var result = (((TestComplex)Utils.Binder.Bind(typeof(TestComplex), nameValue, "")));
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Name);
-            Assert.AreNotEqual(string.Empty, result.SharingOptions);
-            Assert.AreEqual(result.SharingOptions.Length, 1);
+            Assert.IsNotNull(result.SharingOptions);
+            Assert.HasCount(1, result.SharingOptions);
 
         }
 

@@ -1296,21 +1296,34 @@
     <Content Include="skins\default\images\filetype\file_fods.png" />
     <Content Include="skins\default\images\filetype\file_fodt.png" />
     <Content Include="skins\default\images\filetype\file_htm.png" />
+    <Content Include="skins\default\images\filetype\file_hwp.png" />
+    <Content Include="skins\default\images\filetype\file_hwpx.png" />
     <Content Include="skins\default\images\filetype\file_ics.png" />
+    <Content Include="skins\default\images\filetype\file_key.png" />
+    <Content Include="skins\default\images\filetype\file_md.png" />
     <Content Include="skins\default\images\filetype\file_mht.png" />
     <Content Include="skins\default\images\filetype\file_mhtml.png" />
     <Content Include="skins\default\images\filetype\file_mkv.png" />
     <Content Include="skins\default\images\filetype\file_mov.png" />
     <Content Include="skins\default\images\filetype\file_mp4.png" />
     <Content Include="skins\default\images\filetype\file_mpg.png" />
+    <Content Include="skins\default\images\filetype\file_numbers.png" />
+    <Content Include="skins\default\images\filetype\file_odg.png" />
     <Content Include="skins\default\images\filetype\file_oform.png" />
     <Content Include="skins\default\images\filetype\file_otp.png" />
     <Content Include="skins\default\images\filetype\file_ots.png" />
     <Content Include="skins\default\images\filetype\file_ott.png" />
+    <Content Include="skins\default\images\filetype\file_pages.png" />
     <Content Include="skins\default\images\filetype\file_stw.png" />
     <Content Include="skins\default\images\filetype\file_sxc.png" />
     <Content Include="skins\default\images\filetype\file_sxi.png" />
     <Content Include="skins\default\images\filetype\file_sxw.png" />
+    <Content Include="skins\default\images\filetype\file_tsv.png" />
+    <Content Include="skins\default\images\filetype\file_vsdm.png" />
+    <Content Include="skins\default\images\filetype\file_vssm.png" />
+    <Content Include="skins\default\images\filetype\file_vssx.png" />
+    <Content Include="skins\default\images\filetype\file_vstm.png" />
+    <Content Include="skins\default\images\filetype\file_vstx.png" />
     <Content Include="skins\default\images\filetype\file_wps.png" />
     <Content Include="skins\default\images\filetype\file_wpt.png" />
     <Content Include="skins\default\images\filetype\retina\file_avi.png" />
@@ -1332,22 +1345,35 @@
     <Content Include="skins\default\images\filetype\retina\file_gsheet.png" />
     <Content Include="skins\default\images\filetype\retina\file_gslides.png" />
     <Content Include="skins\default\images\filetype\retina\file_htm.png" />
+    <Content Include="skins\default\images\filetype\retina\file_hwp.png" />
+    <Content Include="skins\default\images\filetype\retina\file_hwpx.png" />
     <Content Include="skins\default\images\filetype\retina\file_ics.png" />
+    <Content Include="skins\default\images\filetype\retina\file_key.png" />
+    <Content Include="skins\default\images\filetype\retina\file_md.png" />
     <Content Include="skins\default\images\filetype\retina\file_mht.png" />
     <Content Include="skins\default\images\filetype\retina\file_mhtml.png" />
     <Content Include="skins\default\images\filetype\retina\file_mkv.png" />
     <Content Include="skins\default\images\filetype\retina\file_mov.png" />
     <Content Include="skins\default\images\filetype\retina\file_mp4.png" />
     <Content Include="skins\default\images\filetype\retina\file_mpg.png" />
+    <Content Include="skins\default\images\filetype\retina\file_numbers.png" />
+    <Content Include="skins\default\images\filetype\retina\file_odg.png" />
     <Content Include="skins\default\images\filetype\retina\file_oform.png" />
     <Content Include="skins\default\images\filetype\retina\file_otp.png" />
     <Content Include="skins\default\images\filetype\retina\file_ots.png" />
     <Content Include="skins\default\images\filetype\retina\file_ott.png" />
+    <Content Include="skins\default\images\filetype\retina\file_pages.png" />
     <Content Include="skins\default\images\filetype\retina\file_pptt.png" />
     <Content Include="skins\default\images\filetype\retina\file_stw.png" />
     <Content Include="skins\default\images\filetype\retina\file_sxc.png" />
     <Content Include="skins\default\images\filetype\retina\file_sxi.png" />
     <Content Include="skins\default\images\filetype\retina\file_sxw.png" />
+    <Content Include="skins\default\images\filetype\retina\file_tsv.png" />
+    <Content Include="skins\default\images\filetype\retina\file_vsdm.png" />
+    <Content Include="skins\default\images\filetype\retina\file_vssm.png" />
+    <Content Include="skins\default\images\filetype\retina\file_vssx.png" />
+    <Content Include="skins\default\images\filetype\retina\file_vstm.png" />
+    <Content Include="skins\default\images\filetype\retina\file_vstx.png" />
     <Content Include="skins\default\images\filetype\retina\file_wps.png" />
     <Content Include="skins\default\images\filetype\retina\file_wpt.png" />
     <Content Include="skins\default\images\filetype\retina\file_xlst.png" />
@@ -1382,16 +1408,22 @@
     <Content Include="skins\default\images\filetype\thumb\file_gslides.png" />
     <Content Include="skins\default\images\filetype\thumb\file_htm.png" />
     <Content Include="skins\default\images\filetype\thumb\file_html.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_hwp.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_hwpx.png" />
     <Content Include="skins\default\images\filetype\thumb\file_iaf.png" />
     <Content Include="skins\default\images\filetype\thumb\file_ics.png" />
     <Content Include="skins\default\images\filetype\thumb\file_image.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_key.png" />
     <Content Include="skins\default\images\filetype\thumb\file_m2ts.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_md.png" />
     <Content Include="skins\default\images\filetype\thumb\file_mht.png" />
     <Content Include="skins\default\images\filetype\thumb\file_mhtml.png" />
     <Content Include="skins\default\images\filetype\thumb\file_mkv.png" />
     <Content Include="skins\default\images\filetype\thumb\file_mov.png" />
     <Content Include="skins\default\images\filetype\thumb\file_mp4.png" />
     <Content Include="skins\default\images\filetype\thumb\file_mpg.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_numbers.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_odg.png" />
     <Content Include="skins\default\images\filetype\thumb\file_odp.png" />
     <Content Include="skins\default\images\filetype\thumb\file_ods.png" />
     <Content Include="skins\default\images\filetype\thumb\file_odt.png" />
@@ -1399,6 +1431,7 @@
     <Content Include="skins\default\images\filetype\thumb\file_otp.png" />
     <Content Include="skins\default\images\filetype\thumb\file_ots.png" />
     <Content Include="skins\default\images\filetype\thumb\file_ott.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_pages.png" />
     <Content Include="skins\default\images\filetype\thumb\file_pdf.png" />
     <Content Include="skins\default\images\filetype\thumb\file_pot.png" />
     <Content Include="skins\default\images\filetype\thumb\file_potm.png" />
@@ -1418,9 +1451,15 @@
     <Content Include="skins\default\images\filetype\thumb\file_sxc.png" />
     <Content Include="skins\default\images\filetype\thumb\file_sxi.png" />
     <Content Include="skins\default\images\filetype\thumb\file_sxw.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_tsv.png" />
     <Content Include="skins\default\images\filetype\thumb\file_txt.png" />
     <Content Include="skins\default\images\filetype\thumb\file_video.png" />
     <Content Include="skins\default\images\filetype\thumb\file_videounk.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_vsdm.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_vssm.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_vssx.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_vstm.png" />
+    <Content Include="skins\default\images\filetype\thumb\file_vstx.png" />
     <Content Include="skins\default\images\filetype\thumb\file_wps.png" />
     <Content Include="skins\default\images\filetype\thumb\file_wpt.png" />
     <Content Include="skins\default\images\filetype\thumb\file_xls.png" />
@@ -4496,7 +4535,7 @@
       <Version>21.12.22.2</Version>
     </PackageReference>
     <PackageReference Include="AWSSDK.SecurityToken">
-      <Version>3.7.1.47</Version>
+      <Version>4.0.5.13</Version>
     </PackageReference>
     <PackageReference Include="dotless">
       <Version>1.6.7</Version>
@@ -4526,7 +4565,7 @@
       <Version>3.1.13</Version>
     </PackageReference>
     <PackageReference Include="jQuery.UI.Combined">
-      <Version>1.12.1</Version>
+      <Version>1.13.2</Version>
     </PackageReference>
     <PackageReference Include="libphonenumber-csharp">
       <Version>8.12.30</Version>
@@ -4568,6 +4607,9 @@
     <Copy SourceFiles="$(NuGetPackageRoot)jquery.fileupload\9.22.0\content\Scripts\jQuery.FileUpload\jquery.fileupload.js" DestinationFiles="$(MSBuildProjectDirectory)\js\uploader\jquery.fileupload.js" ContinueOnError="true" />
   </Target>
   <Target Name="Clean" Condition=" false " DependsOnTargets="$(CleanDependsOn)" />
+  <Target Name="CopySystemWeb" AfterTargets="Build">
+    <Copy SourceFiles="$(FrameworkPathOverride)\System.Web.dll" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" ContinueOnError="true" />
+  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

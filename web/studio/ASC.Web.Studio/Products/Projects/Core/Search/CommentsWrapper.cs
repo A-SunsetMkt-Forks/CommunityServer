@@ -21,6 +21,8 @@ using ASC.ElasticSearch;
 using ASC.Projects.Core.Domain;
 using ASC.Web.Projects.Configuration;
 
+using Mapster;
+
 namespace ASC.Web.Projects.Core.Search
 {
     public sealed class CommentsWrapper : Wrapper
@@ -44,7 +46,7 @@ namespace ASC.Web.Projects.Core.Search
 
         public static implicit operator CommentsWrapper(Comment comment)
         {
-            return ProductEntryPoint.Mapper.Map<CommentsWrapper>(comment);
+            return comment.Adapt<CommentsWrapper>(ProductEntryPoint.Config);
         }
     }
 }

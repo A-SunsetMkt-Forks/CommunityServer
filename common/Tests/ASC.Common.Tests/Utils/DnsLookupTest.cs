@@ -27,27 +27,23 @@ namespace ASC.Common.Tests.Utils
     public class DnsLookupTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "domainName")]
         public void DomainNameEmptyExists()
         {
             const string domain = "";
 
             var dnsLoopup = new DnsLookup();
 
-            dnsLoopup.IsDomainExists(domain);
+            Assert.Throws<ArgumentNullException>(() => dnsLoopup.IsDomainExists(domain));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Domain name could not be parsed")]
         public void DomainNameInvalidExists()
         {
             const string domain = "/.";
 
             var dnsLoopup = new DnsLookup();
 
-            var exists = dnsLoopup.IsDomainExists(domain);
-
-            Assert.IsTrue(exists);
+            Assert.Throws<ArgumentException>(() => dnsLoopup.IsDomainExists(domain));
         }
 
         [TestMethod]
@@ -172,7 +168,7 @@ namespace ASC.Common.Tests.Utils
 
             var mxRecords = dnsLoopup.GetDomainMxRecords(domain);
 
-            Assert.IsTrue(!mxRecords.Any());
+            Assert.IsFalse(mxRecords.Any());
         }
     }
 }

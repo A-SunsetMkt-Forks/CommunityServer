@@ -34,6 +34,8 @@ using ASC.Data.Backup.Storage;
 using ASC.Data.Backup.Tasks.Modules;
 using ASC.Data.Storage;
 using ASC.Data.Storage.ZipOperators;
+using ASC.Web.Studio.Core.SMS;
+using ASC.Web.Studio.Core.TFA;
 
 using Newtonsoft.Json;
 
@@ -110,23 +112,7 @@ namespace ASC.Data.Backup.Tasks
                     }
                     RestoreMailTable(dataReader);
 
-                    try
-                    {
-                        using (var dbManager = new DbManager("default", 100000))
-                        {
-                            //set new domain name in dns record
-                            dbManager.ExecuteNonQuery("update mail_server_dns set mx=(select hostname from mail_mailbox_server where id_provider=-1 limit 1)");
-
-                            dbManager.ExecuteNonQuery("update mail_mailbox set id_smtp_server = (select id from mail_mailbox_server where id_provider = -1 and type = 'smtp' limit 1), id_in_server = (select id from mail_mailbox_server where id_provider = -1 and type = 'imap' limit 1) where is_server_mailbox=1");
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error(ex);
-                    }
-
-                        var backupRepository = BackupStorageFactory.GetBackupRepository();
+                    var backupRepository = BackupStorageFactory.GetBackupRepository();
                     backupRepository.MigrationBackupRecords(TenantId, _columnMapper.GetTenantMapping(), ConfigPath);
                 }
 
@@ -144,6 +130,19 @@ namespace ASC.Data.Backup.Tasks
                 if (UnblockPortalAfterCompleted)
                 {
                     SetTenantActive(dbFactory, _columnMapper.GetTenantMapping());
+                }
+
+                if (CoreContext.Configuration.Standalone)
+                {
+                    try
+                    {
+                        Logger.Debug("clear 2fa settings");
+                        Clear2faSettings(dbFactory, Dump ? -1 : _columnMapper.GetTenantMapping());
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);
+                    }
                 }
             }
 
@@ -195,6 +194,14 @@ namespace ASC.Data.Backup.Tasks
                 {
                     var restoreTask = new RestoreMailTableTask(Logger, dataReader, ConfigPath, dbconnection);
                     restoreTask.RunJob();
+                }
+
+                using (var dbManager = new DbManager("default", 100000))
+                {
+                    //set new domain name in dns record
+                    dbManager.ExecuteNonQuery("update mail_server_dns set mx=(select hostname from mail_mailbox_server where id_provider=-1 limit 1)");
+
+                    dbManager.ExecuteNonQuery("update mail_mailbox set id_smtp_server = (select id from mail_mailbox_server where id_provider = -1 and type = 'smtp' limit 1), id_in_server = (select id from mail_mailbox_server where id_provider = -1 and type = 'imap' limit 1) where is_server_mailbox=1");
                 }
             }
             catch (Exception ex)
@@ -481,6 +488,23 @@ namespace ASC.Data.Backup.Tasks
                     "where id = '{2}'",
                     (int)TenantStatus.Active,
                     DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"),
+                    tenantId);
+
+                connection.CreateCommand(commandText).WithTimeout(120).ExecuteNonQuery();
+            }
+        }
+
+        private static void Clear2faSettings(DbFactory dbFactory, int tenantId)
+        {
+            using (var connection = dbFactory.OpenConnection())
+            {
+                var commandText = string.Format(
+                    "delete from webstudio_settings " +
+                    "where ID in ('{0}','{1}','{2}') " +
+                    (tenantId > 0 ? "and TenantID = {3}" : ""),
+                    new TfaAppAuthSettings().ID,
+                    new TfaAppUserSettings().ID,
+                    new StudioSmsNotificationSettings().ID,
                     tenantId);
 
                 connection.CreateCommand(commandText).WithTimeout(120).ExecuteNonQuery();

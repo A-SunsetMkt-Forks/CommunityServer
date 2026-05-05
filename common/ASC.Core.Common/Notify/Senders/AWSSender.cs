@@ -189,8 +189,11 @@ namespace ASC.Core.Notify.Senders
                     {
                         var r = new GetSendQuotaRequest();
                         quota = ses.GetSendQuota(r);
-                        sendWindow = TimeSpan.FromSeconds(1.0 / quota.MaxSendRate);
-                        log.DebugFormat("quota: {0}/{1} at {2} mps. send window:{3}", quota.SentLast24Hours, quota.Max24HourSend, quota.MaxSendRate, sendWindow);
+                        if (quota.MaxSendRate.HasValue && quota.MaxSendRate.Value > 0)
+                        {
+                            sendWindow = TimeSpan.FromSeconds(1.0 / quota.MaxSendRate.Value);
+                            log.DebugFormat("quota: {0}/{1} at {2} mps. send window:{3}", quota.SentLast24Hours, quota.Max24HourSend, quota.MaxSendRate, sendWindow);
+                        }
                     }
                     catch (Exception e)
                     {

@@ -29,7 +29,7 @@ namespace ASC.Core.Common.Tests
     [TestClass]
     public class DbUserServiceTest : DbBaseTest<DbUserService>
     {
-        [ClassInitialize]
+        [TestInitialize]
         public void ClearData()
         {
             Service.GetUsers(Tenant, default(DateTime))
@@ -55,7 +55,7 @@ namespace ASC.Core.Common.Tests
                 LastName = "last name",
                 BirthDate = new DateTime(2011, 01, 01, 7, 8, 9),
                 Sex = true,
-                Email = "email@mail.ru",
+                Email = "email@test.com",
                 Location = "location",
                 Notes = "notes",
                 Status = EmployeeStatus.Active,

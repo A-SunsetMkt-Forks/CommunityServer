@@ -70,20 +70,29 @@ namespace ASC.Security.Cryptography
             return ValidateEmailKey(email, key, TimeSpan.MaxValue);
         }
 
+        public static ValidationResult ValidateEmailKey(int tenantId, string email, string key)
+        {
+            return ValidateEmailKey(tenantId, email, key, TimeSpan.MaxValue);
+        }
+
         public static ValidationResult ValidateEmailKey(string email, string key, TimeSpan validInterval)
         {
-            var result = ValidateEmailKeyInternal(email, key, validInterval);
-            log.DebugFormat("validation result: {0}, source: {1} with key: {2} interval: {3} tenant: {4}", result, email, key, validInterval, CoreContext.TenantManager.GetCurrentTenant().TenantId);
+            return ValidateEmailKey(CoreContext.TenantManager.GetCurrentTenant().TenantId, email, key, validInterval);
+        }
+
+        public static ValidationResult ValidateEmailKey(int tenantId, string email, string key, TimeSpan validInterval)
+        {
+            var result = ValidateEmailKeyInternal(tenantId, email, key, validInterval);
+            log.DebugFormat("validation result: {0}, source: {1} with key: {2} interval: {3} tenant: {4}", result, email, key, validInterval, tenantId);
             return result;
         }
 
-
-        private static ValidationResult ValidateEmailKeyInternal(string email, string key, TimeSpan validInterval)
+        private static ValidationResult ValidateEmailKeyInternal(int tenantId, string email, string key, TimeSpan validInterval)
         {
             if (string.IsNullOrEmpty(email)) throw new ArgumentNullException("email");
             if (key == null) throw new ArgumentNullException("key");
 
-            email = FormatEmail(CoreContext.TenantManager.GetCurrentTenant().TenantId, email);
+            email = FormatEmail(tenantId, email);
             var parts = key.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length != 2) return ValidationResult.Invalid;
 

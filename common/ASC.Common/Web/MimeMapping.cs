@@ -240,6 +240,7 @@ namespace ASC.Common.Web
             AddMimeMapping(".hlp", "application/hlp");
             AddMimeMapping(".hlp", "application/x-helpfile");
             AddMimeMapping(".hlp", "application/x-winhelp");
+            AddMimeMapping(".hml", "multipart/related");
             AddMimeMapping(".hpg", "application/vnd.hp-hpgl");
             AddMimeMapping(".hpgl", "application/vnd.hp-hpgl");
             AddMimeMapping(".hqx", "application/binhex");
@@ -255,6 +256,9 @@ namespace ASC.Common.Web
             AddMimeMapping(".htmls", "text/html");
             AddMimeMapping(".htt", "text/webviewhtml");
             AddMimeMapping(".htx", "text/html");
+            AddMimeMapping(".hwp", "application/x-hwp");
+            AddMimeMapping(".hwp", "application/x-hwp-v5");
+            AddMimeMapping(".hwpx", "application/x-hwpx");
             AddMimeMapping(".ice", "x-conference/x-cooltalk");
             AddMimeMapping(".ico", "image/x-icon");
             AddMimeMapping(".idc", "text/plain");
@@ -302,6 +306,8 @@ namespace ASC.Common.Web
             AddMimeMapping(".jut", "image/jutvision");
             AddMimeMapping(".kar", "audio/midi");
             AddMimeMapping(".kar", "music/x-karaoke");
+            AddMimeMapping(".key", "application/vnd.apple.keynote");
+            AddMimeMapping(".key", "application/x-iwork-keynote-sffkey");
             AddMimeMapping(".ksh", "application/x-ksh");
             AddMimeMapping(".ksh", "text/x-script.ksh");
             AddMimeMapping(".la", "audio/nspaudio");
@@ -346,6 +352,7 @@ namespace ASC.Common.Web
             AddMimeMapping(".map", "application/x-navimap");
             AddMimeMapping(".mar", "text/plain");
             AddMimeMapping(".mbd", "application/mbedlet");
+            AddMimeMapping(".md", "text/markdown");
             AddMimeMapping(".mdb", "application/x-msaccess");
             AddMimeMapping(".mc$", "application/x-magic-cap-package-1.0");
             AddMimeMapping(".mcd", "application/mcad");
@@ -412,6 +419,8 @@ namespace ASC.Common.Web
             AddMimeMapping(".mvb", "application/x-msmediaview");
             AddMimeMapping(".my", "audio/make");
             AddMimeMapping(".mzz", "application/x-vnd.audioexplosion.mzz");
+            AddMimeMapping(".numbers", "application/vnd.apple.numbers");
+            AddMimeMapping(".numbers", "application/x-iwork-numbers-sffnumbers");
             AddMimeMapping(".nap", "image/naplps");
             AddMimeMapping(".naplps", "image/naplps");
             AddMimeMapping(".nc", "application/x-netcdf");
@@ -424,6 +433,8 @@ namespace ASC.Common.Web
             AddMimeMapping(".nws", "message/rfc822");
             AddMimeMapping(".o", "application/octet-stream");
             AddMimeMapping(".oda", "application/oda");
+            AddMimeMapping(".odg", "application/vnd.oasis.opendocument.graphics");
+            AddMimeMapping(".odg", "application/x-vnd.oasis.opendocument.graphics");
             AddMimeMapping(".odp", "application/vnd.oasis.opendocument.presentation");
             AddMimeMapping(".ods", "application/vnd.oasis.opendocument.spreadsheet");
             AddMimeMapping(".odt", "application/vnd.oasis.opendocument.text");
@@ -453,6 +464,8 @@ namespace ASC.Common.Web
             AddMimeMapping(".p7m", "application/x-pkcs7-mime");
             AddMimeMapping(".p7r", "application/x-pkcs7-certreqresp");
             AddMimeMapping(".p7s", "application/pkcs7-signature");
+            AddMimeMapping(".pages", "application/vnd.apple.pages");
+            AddMimeMapping(".pages", "application/x-iwork-pages-sffpages");
             AddMimeMapping(".part", "application/pro_eng");
             AddMimeMapping(".pas", "text/pascal");
             AddMimeMapping(".pbm", "image/x-portable-bitmap");
@@ -692,6 +705,14 @@ namespace ASC.Common.Web
             AddMimeMapping(".vrml", "x-world/x-vrml");
             AddMimeMapping(".vrt", "x-world/x-vrt");
             AddMimeMapping(".vsd", "application/x-visio");
+            AddMimeMapping(".vsdm", "application/vnd.ms-visio.drawing.macroEnabled.12");
+            AddMimeMapping(".vsdx", "application/vnd.ms-visio.drawing");
+            AddMimeMapping(".vsdx", "application/vnd.visio2013");
+            AddMimeMapping(".vsdx", "application/vnd.visio");
+            AddMimeMapping(".vssm", "application/vnd.ms-visio.stencil.macroEnabled.12");
+            AddMimeMapping(".vssx", "application/vnd.ms-visio.stencil");
+            AddMimeMapping(".vstm", "application/vnd.ms-visio.template.macroEnabled.12");
+            AddMimeMapping(".vstx", "application/vnd.ms-visio.template");
             AddMimeMapping(".vst", "application/x-visio");
             AddMimeMapping(".vsw", "application/x-visio");
             AddMimeMapping(".w60", "application/wordperfect6.0");

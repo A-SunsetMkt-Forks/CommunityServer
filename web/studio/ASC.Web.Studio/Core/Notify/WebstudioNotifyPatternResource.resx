@@ -759,7 +759,7 @@ More information in ONLYOFFICE "Help Center":"${__HelpLink}".</value>
 
 We hope you enjoy using integrated ONLYOFFICE document editors. Here are some tips that might be useful: 
 
-*#1. Share documents* to individuals and groups. Choose their access level - Read Only, Comment, Form Filling, Review or Full Access. Let other users apply their own filters in spreadsheets without disturbing co-authors. Restrict downloading and printing using "ONLYOFFICE API":"https://api.onlyoffice.com/editors/config/document/permissions". 
+*#1. Share documents* to individuals and groups. Choose their access level - Read Only, Comment, Form Filling, Review or Full Access. Let other users apply their own filters in spreadsheets without disturbing co-authors. Restrict downloading and printing using "ONLYOFFICE API":"https://api.onlyoffice.com/docs/docs-api/usage-api/config/document/permissions/". 
 
 *#2. Learn how document saving works* and adjust it to your own needs. "Learn more":"https://www.onlyoffice.com/blog/2020/04/save-and-force-save-in-onlyoffice-never-lose-a-document/"
 
@@ -1136,7 +1136,7 @@ You have requested to permanently delete your [${__VirtualRootPath}](${__Virtual
 _Important! All the data stored on your portal, as well as your registration details will be lost and cannot be recovered._
 
 #if($AutoRenew == "True")
-Before you delete the portal, please make sure that automatic billing is turned off. You may check the status of automatic billing in your [Avangate account](https://secure.avangate.com/myaccount/").
+Before you delete the portal, please make sure that automatic billing is turned off. You may check the status of automatic billing in your [Avangate account](https://secure.avangate.com/myaccount/).
 #end
 
 If you still want to delete your [${__VirtualRootPath}](${__VirtualRootPath}) portal please follow the link below to confirm the operation:

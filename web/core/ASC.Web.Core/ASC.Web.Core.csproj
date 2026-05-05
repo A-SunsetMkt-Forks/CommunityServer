@@ -107,6 +107,7 @@
     <Compile Include="Helpers\ApiSystemHelper.cs" />
     <Compile Include="Jabber\FireBase.cs" />
     <Compile Include="Mail\MailServiceHelper.cs" />
+    <Compile Include="WebItemStoreValidator.cs" />
     <Compile Include="Sms\SmsKeyStorage.cs" />
     <Compile Include="Sms\SmsProvider.cs" />
     <Compile Include="Sms\SmsSender.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="IAddon.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Extensions\ProductModuleExtension.cs" />
-    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Extensions\UserInfoExtension.cs" />
     <Compile Include="Helpers\GrammaticalHelper.cs" />
     <Compile Include="Helpers\ImageHelpers.cs" />
@@ -250,7 +250,7 @@
       <Version>21.12.22.2</Version>
     </PackageReference>
     <PackageReference Include="AWSSDK.S3">
-      <Version>3.7.1.29</Version>
+      <Version>4.0.19.2</Version>
     </PackageReference>
     <PackageReference Include="dotless">
       <Version>1.6.7</Version>

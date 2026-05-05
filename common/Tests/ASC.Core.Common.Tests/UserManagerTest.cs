@@ -60,7 +60,7 @@ namespace ASC.Core.Common.Tests
             Assert.AreNotEqual(0, users.Length);
 
             users = CoreContext.UserManager.Search("иванов николай", EmployeeStatus.Active, new Guid("613fc896-3ddd-4de1-a567-edbbc6cf1fc8"));
-            Assert.AreEqual(0, users);
+            Assert.AreEqual(0, users.Length);
         }
 
         [TestMethod]
@@ -76,7 +76,6 @@ namespace ASC.Core.Common.Tests
             var u1 = users[1];
             var u2 = users[2];
 
-            //проверка кэша ceo
             var ceoTemp = CoreContext.UserManager.GetCompanyCEO();
             CoreContext.UserManager.SetCompanyCEO(ceo.ID);
             ceoTemp = CoreContext.UserManager.GetCompanyCEO();
@@ -86,7 +85,6 @@ namespace ASC.Core.Common.Tests
             ceoTemp = CoreContext.UserManager.GetCompanyCEO();
             Assert.AreEqual(ceo, ceoTemp);
 
-            //установка манагеров
             CoreContext.UserManager.SetDepartmentManager(g1.ID, u1.ID);
 
             CoreContext.UserManager.SetDepartmentManager(g1.ID, u2.ID);

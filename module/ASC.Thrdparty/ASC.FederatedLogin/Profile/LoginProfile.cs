@@ -396,4 +396,23 @@ namespace ASC.FederatedLogin.Profile
             }
         }
     }
+
+
+    [Serializable]
+    public class TenantUser
+    {
+        public Guid UserId { get; set; }
+
+        public string UserEmail { get; set; }
+
+        public string UserFirstName { get; set; }
+
+        public string UserLastName { get; set; }
+
+        public int TenantId { get; set; }
+
+        public string TenantAlias { get; set; }
+
+        public string TenantMappedDomain { get; set; }
+    }
 }

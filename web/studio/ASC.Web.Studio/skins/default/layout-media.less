@@ -56,8 +56,6 @@
     .nav-content:hover {
         overflow-y: scroll;
         margin-right: -16px;
-        scrollbar-width: thin;
-        scrollbar-color: #BFBFBF transparent;
     }
 
     .nav-content #treeViewContainer {
@@ -69,8 +67,6 @@
         margin-right: -24px;
         overflow-y: scroll;
         overflow-x: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #BFBFBF transparent;
     }
 
     .page-content.webkit-scrollbar::-webkit-scrollbar-track { background: transparent; }
@@ -86,11 +82,11 @@
     @-moz-document url-prefix() {
         .nav-content:hover {
             margin-right: -16px;
-            padding-right: 8px;
+            padding-right: 16px;
         }
         .page-content {
             margin-right: -16px;
-            padding-right: 8px;
+            padding-right: 16px;
         }
         .webkit-scrollbar {
             scrollbar-width: thin;

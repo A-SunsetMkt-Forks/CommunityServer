@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ROOT_DIR="/var/www/onlyoffice/Data/certs";
+DIR=/var/www/onlyoffice
+ROOT_DIR="${DIR}/Data/certs";
 NGINX_CONF_DIR="/etc/nginx/sites-enabled";
 NGINX_ROOT_DIR="/etc/nginx";
 APP_CONFIG_DIR="/etc/onlyoffice/communityserver"
@@ -53,6 +54,11 @@ else
         sed '/resolver/d' -i default-onlyoffice-ssl.conf;
         sed '/resolver_timeout/d' -i default-onlyoffice-ssl.conf;
 fi
+
+DOMAIN=$(openssl x509 -in "$SSL_CERTIFICATE_PATH" -noout -text | grep -oP '(?<=DNS:)[^,]+' | head -1)
+DOMAIN=${DOMAIN:-$(openssl x509 -in "$SSL_CERTIFICATE_PATH" -noout -subject | sed -n 's/.*CN *= *\([^,]*\).*/\1/p')}
+sed '/files\.docservice\.url\.portal/s!\(value\s*=\s*\"\)[^\"]*\"!\1https:\/\/'${DOMAIN}'\"!' -i ${DIR}/WebStudio/web.appsettings.config;
+sed '/files\.docservice\.url\.portal/s!\(value\s*=\s*\"\)[^\"]*\"!\1https:\/\/'${DOMAIN}'\"!' -i ${DIR}/Services/TeamLabSvc/TeamLabSvc.exe.config;
 
 sed 's_\(\"DefaultApiSchema":\).*,_\1 "https",_' -i ${APP_CONFIG_DIR}/mail.production.json
 

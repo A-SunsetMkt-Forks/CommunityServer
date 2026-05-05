@@ -219,6 +219,28 @@ namespace ASC.Core.Billing
             return new Dictionary<string, Dictionary<string, decimal>>();
         }
 
+        public string ChangeDocspaceNonProfitTariff(string portalId, bool isActive, string email = null, string firstName = null, string lastName = null)
+        {
+            var parameters = new List<Tuple<string, string>>
+            {
+                Tuple.Create("IsActive", isActive.ToString().ToLowerInvariant())
+            };
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                parameters.Add(Tuple.Create("Email", email));
+            }
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                parameters.Add(Tuple.Create("FirstName", firstName));
+            }
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                parameters.Add(Tuple.Create("LastName", lastName));
+            }
+
+           return Request("ChangeNonProfit", portalId, parameters.ToArray());
+        }
 
         private string CreateAuthToken(string pkey, string machinekey)
         {

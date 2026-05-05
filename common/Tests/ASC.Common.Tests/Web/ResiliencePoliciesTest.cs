@@ -46,7 +46,7 @@ namespace ASC.Common.Tests.Web
         public async Task CheckSuccessfulCase()
         {
             var response = await ResiliencePolicyManager.GetStringWithPoliciesAsync(REQUEST_IDENTIFIER, GetSuccessfullFunction());
-            Assert.AreEqual(response, TEST_MESSAGE);
+            Assert.AreEqual(TEST_MESSAGE, response);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace ASC.Common.Tests.Web
             }
             catch (Exception ex)
             {
-                Assert.AreEqual(ex.Message, TEST_MESSAGE);
+                Assert.AreEqual(TEST_MESSAGE, ex.Message);
             }
         }
 
@@ -66,7 +66,7 @@ namespace ASC.Common.Tests.Web
         public async Task CheckRetryPolicy()
         {
             await ResiliencePolicyManager.GetStringWithPoliciesAsync(REQUEST_IDENTIFIER, GetSuccessfullFunction());
-            Assert.AreEqual(retryCounter, 1);
+            Assert.AreEqual(1, retryCounter);
             retryCounter = 0;
 
             try
@@ -75,7 +75,7 @@ namespace ASC.Common.Tests.Web
             }
             catch (Exception)
             {
-                Assert.AreEqual(retryCounter, ResiliencePolicyManager.RETRY_COUNT + 1);
+                Assert.AreEqual(ResiliencePolicyManager.RETRY_COUNT + 1, retryCounter);
             }
         }
      
@@ -99,7 +99,7 @@ namespace ASC.Common.Tests.Web
                 }
             }
 
-            Assert.AreEqual(retryCounter, ResiliencePolicyManager.MINIMUM_THROUGHPUT);
+            Assert.AreEqual(ResiliencePolicyManager.MINIMUM_THROUGHPUT, retryCounter);
         }
 
 
@@ -133,7 +133,7 @@ namespace ASC.Common.Tests.Web
                 }
             }
 
-            Assert.AreEqual(retryCounter, ResiliencePolicyManager.MINIMUM_THROUGHPUT);
+            Assert.AreEqual(ResiliencePolicyManager.MINIMUM_THROUGHPUT, retryCounter);
         }
 
         private Func<Task<string>> GetSuccessfullFunction()

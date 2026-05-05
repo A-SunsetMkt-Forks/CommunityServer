@@ -58,16 +58,22 @@ ASC.Files.Utility.FileExtensionLibrary = {
     GslidesExts: [".gslides"],
     HtmExts: [".htm"],
     HtmlExts: [".html"],
+    HwpExts: [".hwp"],
+    HwpxExts: [".hwpx"],
     IafExts: [".iaf"],
     IcsExts: [".ics"],
     ImgExts: [".bmp", ".cod", ".gif", ".ief", ".jpe", ".jpeg", ".jpg", ".jfif", ".tiff", ".tif", ".cmx", ".ico", ".png", ".pnm", ".pbm", ".ppm", ".rgb", ".xbm", ".xpm", ".xwd", ".webp"],
+    KeyExts: [".key"],
     M2tsExts: [".m2ts"],
+    MdExts: [".md"],
     MhtExts: [".mht"],
     MhtmlExts: [".mhtml"],
     MkvExts: [".mkv"],
     MovExts: [".mov"],
     Mp4Exts: [".mp4"],
     MpgExts: [".mpg"],
+    NumbersExts: [".numbers"],
+    OdgExts: [".odg"],
     OdpExts: [".odp"],
     OdsExts: [".ods"],
     OdtExts: [".odt"],
@@ -75,6 +81,7 @@ ASC.Files.Utility.FileExtensionLibrary = {
     OtpExts: [".otp"],
     OtsExts: [".ots"],
     OttExts: [".ott"],
+    PagesExts: [".pages"],
     PdfExts: [".pdf"],
     PotExts: [".pot"],
     PotmExts: [".potm"],
@@ -94,9 +101,15 @@ ASC.Files.Utility.FileExtensionLibrary = {
     SxcExts: [".sxc"],
     SxiExts: [".sxi"],
     SxwExts: [".sxw"],
+    TsvExts: [".tsv"],
     TxtExts: [".txt"],
     VideoExts: [".f4v", ".m4v", ".mpeg", ".ogv", ".webm", ".wmv" ],
     VideoUnkExts: [".3gp", ".asf", ".fla", ".mts", ".svi", ".vob"],
+    VsdmExts: [".vsdm"],
+    VssmExts: [".vssm"],
+    VssxExts: [".vssx"],
+    VstmExts: [".vstm"],
+    VstxExts: [".vstx"],
     WpsExts: [".wps"],
     WptExts: [".wpt"],
     XlsExts: [".xls", ".xlsb"],
@@ -182,14 +195,22 @@ ASC.Files.Utility.getCssClassByFileTitle = function (fileTitle, compact) {
         ext = "Htm";
     else if (checkInArray(fileExtensionLibrary.HtmlExts))
         ext = "Html";
+    else if (checkInArray(fileExtensionLibrary.HwpExts))
+        ext = "Hwp";
+    else if (checkInArray(fileExtensionLibrary.HwpxExts))
+        ext = "Hwpx";
     else if (checkInArray(fileExtensionLibrary.IafExts))
         ext = "Iaf";
     else if (checkInArray(fileExtensionLibrary.IcsExts))
         ext = "Ics";
     else if (checkInArray(fileExtensionLibrary.ImgExts))
         ext = "Image";
+    else if (checkInArray(fileExtensionLibrary.KeyExts))
+        ext = "Key";
     else if (checkInArray(fileExtensionLibrary.M2tsExts))
         ext = "M2ts";
+    else if (checkInArray(fileExtensionLibrary.MdExts))
+        ext = "Md";
     else if (checkInArray(fileExtensionLibrary.MhtExts))
         ext = "Mht";
     else if (checkInArray(fileExtensionLibrary.MhtmlExts))
@@ -202,6 +223,10 @@ ASC.Files.Utility.getCssClassByFileTitle = function (fileTitle, compact) {
         ext = "Mp4";
     else if (checkInArray(fileExtensionLibrary.MpgExts))
         ext = "Mpg";
+    else if (checkInArray(fileExtensionLibrary.NumbersExts))
+        ext = "Numbers";
+    else if (checkInArray(fileExtensionLibrary.OdgExts))
+        ext = "Odg";
     else if (checkInArray(fileExtensionLibrary.OdpExts))
         ext = "Odp";
     else if (checkInArray(fileExtensionLibrary.OdsExts))
@@ -216,6 +241,8 @@ ASC.Files.Utility.getCssClassByFileTitle = function (fileTitle, compact) {
         ext = "Ots";
     else if (checkInArray(fileExtensionLibrary.OttExts))
         ext = "Ott";
+    else if (checkInArray(fileExtensionLibrary.PagesExts))
+        ext = "Pages";
     else if (checkInArray(fileExtensionLibrary.PdfExts))
         ext = "Pdf";
     else if (checkInArray(fileExtensionLibrary.PotExts))
@@ -254,12 +281,24 @@ ASC.Files.Utility.getCssClassByFileTitle = function (fileTitle, compact) {
         ext = "Sxi";
     else if (checkInArray(fileExtensionLibrary.SxwExts))
         ext = "Sxw";
+    else if (checkInArray(fileExtensionLibrary.TsvExts))
+        ext = "Tsv";
     else if (checkInArray(fileExtensionLibrary.TxtExts))
         ext = "Txt";
     else if (checkInArray(fileExtensionLibrary.VideoExts))
         ext = "Video";
     else if (checkInArray(fileExtensionLibrary.VideoUnkExts))
         ext = "VideoUnk";
+    else if (checkInArray(fileExtensionLibrary.VsdmExts))
+        ext = "Vsdm";
+    else if (checkInArray(fileExtensionLibrary.VssmExts))
+        ext = "Vssm";
+    else if (checkInArray(fileExtensionLibrary.VssxExts))
+        ext = "Vssx";
+    else if (checkInArray(fileExtensionLibrary.VstmExts))
+        ext = "Vstm";
+    else if (checkInArray(fileExtensionLibrary.VstxExts))
+        ext = "Vstx";
     else if (checkInArray(fileExtensionLibrary.WpsExts))
         ext = "Wps";
     else if (checkInArray(fileExtensionLibrary.WptExts))
@@ -452,6 +491,14 @@ ASC.Files.Utility.GetFileWebEditorUrl = function (fileId) {
 
     url = ASC.Files.Utility.AddExternalShareKey(url);
     
+    return url;
+};
+
+ASC.Files.Utility.GetFileWebFillUrl = function (fileId) {
+    var url = ASC.Files.Utility.Resource.FileWebFillingUrlString.format(encodeURIComponent(fileId));
+
+    url = ASC.Files.Utility.AddExternalShareKey(url);
+
     return url;
 };
 

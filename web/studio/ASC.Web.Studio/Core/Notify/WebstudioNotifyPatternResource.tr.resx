@@ -288,7 +288,7 @@ Değerli $OwnerName,
 *Önemli! Portalınızdaki tüm veriler, kayıt bilgileri kaybolacak ve kurtarılamayacaktır.*
 
 #if($AutoRenew == "True")
-Portalınızı silmeden önce otomatik faturalandırmanın kapalı olduğundan emin olun. Otomatik faturalandırma statüsünü kontrol etmek için "Avangate hesabı" bölümüne gidebilirsiniz:"https://secure.avangate.com/myaccount/".
+Portalınızı silmeden önce otomatik faturalandırmanın kapalı olduğundan emin olun. Otomatik faturalandırma statüsünü kontrol etmek için "Avangate hesabı":"https://secure.avangate.com/myaccount/" bölümüne gidebilirsiniz.
 #end
 
 "${__VirtualRootPath}":"${__VirtualRootPath}" portalınızı kesinlikle silmek istiyorsanız lütfen aşağıdaki linke tıklayın:

@@ -82,6 +82,7 @@
     <Compile Include="DiscStorage\MappedPath.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GoogleCloud\GoogleCloudStorage.cs" />
+    <Compile Include="IDataStoreValidator.cs" />
     <Compile Include="IDataStore.cs" />
     <Compile Include="IQuotaController.cs" />
     <Compile Include="Migration\IService.cs" />
@@ -146,7 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Amazon.Extensions.S3.Encryption">
-      <Version>2.0.3</Version>
+      <Version>4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Google.Api.Gax.Rest">
       <Version>3.5.0</Version>

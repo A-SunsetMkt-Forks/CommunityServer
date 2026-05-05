@@ -30,7 +30,7 @@ using ASC.Web.Projects.Core.Search;
 using ASC.Web.Projects.Masters.ClientScripts;
 using ASC.Web.Projects.Resources;
 
-using AutoMapper;
+using Mapster;
 
 
 namespace ASC.Web.Projects.Configuration
@@ -38,7 +38,7 @@ namespace ASC.Web.Projects.Configuration
     public class ProductEntryPoint : Product
     {
         private ProductContext context;
-        internal static IMapper Mapper { get; set; }
+        internal static TypeAdapterConfig Config { get; } = new TypeAdapterConfig();
 
         public static readonly Guid ID = EngineFactory.ProductId;
         public static readonly Guid MilestoneModuleID = new Guid("{AF4AFD50-5553-47f3-8F91-651057BC930B}");
@@ -122,17 +122,12 @@ namespace ASC.Web.Projects.Configuration
             ClientScriptLocalization = new ClientLocalizationResources();
             DIHelper.Register();
 
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Task, TasksWrapper>().ForMember(r => r.TenantId, opt => opt.MapFrom(r => GetCurrentTenant()));
-                cfg.CreateMap<Message, DiscussionsWrapper>().ForMember(r => r.TenantId, opt => opt.MapFrom(r => GetCurrentTenant()));
-                cfg.CreateMap<Milestone, MilestonesWrapper>().ForMember(r => r.TenantId, opt => opt.MapFrom(r => GetCurrentTenant()));
-                cfg.CreateMap<Project, ProjectsWrapper>().ForMember(r => r.TenantId, opt => opt.MapFrom(r => GetCurrentTenant()));
-                cfg.CreateMap<Subtask, SubtasksWrapper>().ForMember(r => r.TenantId, opt => opt.MapFrom(r => GetCurrentTenant()));
-                cfg.CreateMap<Comment, CommentsWrapper>().ForMember(r => r.TenantId, opt => opt.MapFrom(r => GetCurrentTenant())).ForMember(r => r.LastModifiedOn, opt => opt.Ignore());
-            });
-            configuration.AssertConfigurationIsValid();
-            Mapper = configuration.CreateMapper();
+            Config.NewConfig<Task, TasksWrapper>().Map(dest => dest.TenantId, src => GetCurrentTenant());
+            Config.NewConfig<Message, DiscussionsWrapper>().Map(dest => dest.TenantId, src => GetCurrentTenant());
+            Config.NewConfig<Milestone, MilestonesWrapper>().Map(dest => dest.TenantId, src => GetCurrentTenant());
+            Config.NewConfig<Project, ProjectsWrapper>().Map(dest => dest.TenantId, src => GetCurrentTenant());
+            Config.NewConfig<Subtask, SubtasksWrapper>().Map(dest => dest.TenantId, src => GetCurrentTenant());
+            Config.NewConfig<Comment, CommentsWrapper>().Map(dest => dest.TenantId, src => GetCurrentTenant()).Ignore(dest => dest.LastModifiedOn);
         }
 
         private int GetCurrentTenant()

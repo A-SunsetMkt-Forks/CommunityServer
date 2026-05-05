@@ -32,6 +32,7 @@ using ASC.Common.Logging;
 using ASC.Core;
 using ASC.Web.Core;
 using ASC.Web.Core.Client;
+using ASC.Web.Core.Files;
 
 namespace ASC.Web.Studio.HttpHandlers
 {
@@ -65,6 +66,7 @@ namespace ASC.Web.Studio.HttpHandlers
             {
                 var template = RenderDocument(context, path, name);
                 context.Response.ContentType = "text/xml";
+                context.Response.AddHeader("Content-Disposition", ContentDispositionUtil.GetHeaderValue(System.IO.Path.GetFileNameWithoutExtension(name) + ".xsl"));
                 context.Response.Write(template.ToString());
             }
 
@@ -80,7 +82,15 @@ namespace ASC.Web.Studio.HttpHandlers
             try
             {
                 var path = string.Format("~{0}{1}{2}", templatePath, System.IO.Path.GetFileNameWithoutExtension(templateName), ".xsl");
-                var template = XDocument.Load(context.Server.MapPath(path));
+
+                var fullPath = context.Server.MapPath(path);
+                var appRoot = context.Server.MapPath("~");
+                if (!fullPath.StartsWith(appRoot, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new HttpException("Cannot use a leading .. to exit above the top directory.");
+                }
+
+                var template = XDocument.Load(fullPath);
                 var ns = template.Root.Name.Namespace;
 
                 if (!template.Elements(ns + "stylesheet").Any())
